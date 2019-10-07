@@ -20,7 +20,7 @@
 
 		<v-flex shrink>
 			<v-btn color="info" :disabled="uiFrozen" :loading="sendingCode" @click="doSend">
-				<v-icon class="mr-2">send</v-icon> {{ $t('input.code.send') }} 
+				<v-icon class="mr-2">send</v-icon> {{ $t('input.code.send') }}
 			</v-btn>
 		</v-flex>
 	</v-layout>
@@ -67,56 +67,17 @@ export default {
 				this.send();
 			}
 		},
-		hasUnprecedentedParameters: (code) => !code || code.trim() === '' || /(M23|M30|M32|M36)[^0-9]/i.test(code),
 		async send() {
 			this.$refs.input.isMenuActive = false;			// FIXME There must be a better solution than this
 
 			const code = (this.code.constructor === String) ? this.code : this.code.value;
 			if (code && code.trim() !== '' && !this.sendingCode) {
-				let codeToSend = '', inQuotes = false, inWhiteSpace = false;
-				if (this.hasUnprecedentedParameters(code)) {
-					// Don't convert certain codes to upper-case
-					codeToSend = code.trim();
-				} else {
-					// Convert code to upper-case and remove comments
-					for (let i = 0; i < code.length; i++) {
-						const char = code[i];
-						if (inQuotes) {
-							if (i < code.length - 1 && char === '\\' && code[i + 1] === '"') {
-								codeToSend += '\\"';
-								i++;
-							} else {
-								if (char === '"') {
-									inQuotes = false;
-								}
-								codeToSend += char;
-							}
-						} else {
-							if (char === '"') {
-								// don't convert escaped strings
-								inQuotes = true;
-							} else if (char === ' ' || char === '\t') {
-								// remove duplicate white spaces
-								if (inWhiteSpace) {
-									continue;
-								}
-								inWhiteSpace = true;
-							} else if (char === ';' || char === '(') {
-								// stop when comments start
-								break;
-							}
-							inWhiteSpace = false;
-							codeToSend += char.toUpperCase();
-						}
-					}
-					codeToSend = codeToSend.trim();
-				}
-
+				let codeToSend = code.trim();
 				// Send the code and wait for completion
 				this.sendingCode = true;
 				try {
 					const reply = await this.sendCode({ code: codeToSend, fromInput: true });
-					if (!inQuotes && !reply.startsWith('Error: ') && !reply.startsWith('Warning: ') && this.codes.indexOf(codeToSend) === -1) {
+					if (!reply.startsWith('Error: ') && !reply.startsWith('Warning: ') && this.codes.indexOf(codeToSend) === -1) {
 						// Automatically remember successful codes
 						this.addCode(codeToSend);
 					}
