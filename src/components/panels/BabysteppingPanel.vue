@@ -9,13 +9,13 @@
 
 			<v-layout row wrap>
 				<v-flex>
-					<code-btn :code="`M290 R1 Z${-babystepAmount}`" no-wait block class="px-0">
+					<code-btn :code="`SET_GCODE_OFFSET Z_ADJUST=${-babystepAmount}`" no-wait block class="px-0">
 						<v-icon>vertical_align_bottom</v-icon> {{ $displayZ(-babystepAmount) }}
 					</code-btn>
 				</v-flex>
 
 				<v-flex>
-					<code-btn :code="`M290 R1 Z${babystepAmount}`" no-wait block class="px-0">
+					<code-btn :code="`SET_GCODE_OFFSET Z_ADJUST=${babystepAmount}`" no-wait block class="px-0">
 						<v-icon>vertical_align_top</v-icon> +{{ $displayZ(babystepAmount) }}
 					</code-btn>
 				</v-flex>
