@@ -134,7 +134,7 @@ export default {
 			}
 		},
 		formatMessage(message) {
-			return message.replace(/Error:/g, '<strong>Error:</strong>').replace(/Warning:/g, '<strong>Warning:</strong>');
+			return message.replace(/\B!! /g, '<strong>Error:</strong>').replace(/\B\/\/ /g, '');
 		},
 		changeSort(column) {
 			if (this.pagination.sortBy === column) {

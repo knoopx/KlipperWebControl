@@ -77,7 +77,7 @@ export default {
 				this.sendingCode = true;
 				try {
 					const reply = await this.sendCode({ code: codeToSend, fromInput: true });
-					if (!reply.startsWith('Error: ') && !reply.startsWith('Warning: ') && this.codes.indexOf(codeToSend) === -1) {
+					if (!reply.startsWith('!! ') && this.codes.indexOf(codeToSend) === -1) {
 						// Automatically remember successful codes
 						this.addCode(codeToSend);
 					}

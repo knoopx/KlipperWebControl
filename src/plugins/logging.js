@@ -19,14 +19,17 @@ export function logCode(code = '', response, hostname = store.state.selectedMach
 		return;
 	}
 
+	const ERROR_PREFIX = '!! '
+	const INFO_PREFIX = '// '
+
 	// Determine type
-	let type = 'info', toLog = response;
-	if (response.startsWith('Error: ')) {
+	let type = 'warning', toLog = response;
+	if (response.startsWith(ERROR_PREFIX)) {
 		type = 'error';
-		toLog = response.substr(7);
-	} else if (response.startsWith('Warning: ')) {
-		type = 'warning';
-		toLog = response.substr(9);
+		toLog = response.substr(ERROR_PREFIX.length);
+	} else if (response.startsWith(INFO_PREFIX)) {
+		type = 'info';
+		toLog = response.substr(INFO_PREFIX.length);
 	} else if (response === '') {
 		type = 'success';
 	}
