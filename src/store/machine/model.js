@@ -132,7 +132,7 @@ export default function(connector) {
 					requestedSpeed: 0.0,
 					topSpeed: 0.0
 				},
-				compensation: "None",
+				compensation: false,
 				drives: [
 					new Drive(),
 					new Drive(),

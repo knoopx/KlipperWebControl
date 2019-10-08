@@ -32,34 +32,18 @@
 
 				<v-card>
 					<v-list>
-						<template v-show="move.compensation">
-							<v-list-tile class="center-menu-item">
-								{{ $t('panel.movement.compensationInUse', [move.compensation]) }}
-							</v-list-tile>
-
-							<v-divider></v-divider>
-						</template>
-
-						<v-list-tile @click="sendCode('G32')">
-							<v-icon class="mr-1">view_module</v-icon> {{ $t(move.geometry.type === 'delta' ? 'panel.movement.runDelta' : 'panel.movement.runBed') }}
+						<v-list-tile @click="sendCode('BED_MESH_CALIBRATE')">
+							<v-icon class="mr-1">view_module</v-icon> Bed Mesh Calibrate
 						</v-list-tile>
-						<v-list-tile :disabled="!move.compensation || move.compensation.indexOf('Point') === -1" @click="sendCode('M561')">
-							<v-icon class="mr-1">clear</v-icon> {{ $t('panel.movement.disableBedCompensation') }} 
+
+						<v-list-tile :disabled="!move.compensation" @click="sendCode('BED_MESH_CLEAR')">
+							<v-icon class="mr-1">clear</v-icon> Bed Mesh Clear
 						</v-list-tile>
 
 						<v-divider></v-divider>
 
-						<v-list-tile @click="sendCode('G29')">
-							<v-icon class="mr-1">grid_on</v-icon> {{ $t('panel.movement.runMesh') }}
-						</v-list-tile>
-						<v-list-tile @click="showMeshEditDialog = true">
-							<v-icon class="mr-1">edit</v-icon> {{ $t('panel.movement.editMesh') }}
-						</v-list-tile>
-						<v-list-tile @click="sendCode('G29 S1')">
-							<v-icon class="mr-1">save</v-icon> {{ $t('panel.movement.loadMesh') }}
-						</v-list-tile>
-						<v-list-tile :disabled="move.compensation !== 'Mesh'" @click="sendCode('G29 S2')">
-							<v-icon class="mr-1">grid_off</v-icon> {{ $t('panel.movement.disableMeshCompensation') }}
+						<v-list-tile @click="sendCode('PROBE_CALIBRATE')">
+							<v-icon class="mr-1">view_module</v-icon> Probe Calibrate
 						</v-list-tile>
 					</v-list>
 				</v-card>
