@@ -14,7 +14,6 @@ import JobControlPanel from './JobControlPanel.vue'
 import JobDataPanel from './JobDataPanel.vue'
 import JobEstimationsPanel from './JobEstimationsPanel.vue'
 import JobInfoPanel from './JobInfoPanel.vue'
-import SettingsAboutPanel from './SettingsAboutPanel.vue'
 import SettingsAppearancePanel from './SettingsAppearancePanel.vue'
 import SettingsCommunicationPanel from './SettingsCommunicationPanel.vue'
 import SettingsElectronicsPanel from './SettingsElectronicsPanel.vue'
@@ -41,7 +40,6 @@ Vue.component('job-data-panel', JobDataPanel)
 Vue.component('job-estimations-panel', JobEstimationsPanel)
 Vue.component('job-info-panel', JobInfoPanel)
 Vue.component('movement-panel', MovementPanel)
-Vue.component('settings-about-panel', SettingsAboutPanel)
 Vue.component('settings-apperance-panel', SettingsAppearancePanel)
 Vue.component('settings-communication-panel', SettingsCommunicationPanel)
 Vue.component('settings-electronics-panel', SettingsElectronicsPanel)
@@ -69,7 +67,6 @@ export default {
 	JobEstimationsPanel,
 	JobInfoPanel,
 	MovementPanel,
-	SettingsAboutPanel,
 	SettingsAppearancePanel,
 	SettingsCommunicationPanel,
 	SettingsElectronicsPanel,

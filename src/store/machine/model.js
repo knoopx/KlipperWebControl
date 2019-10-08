@@ -164,8 +164,8 @@ export default function(connector) {
 				workplaceCoordinates: []
 			},
 			network: {
-				hostname: connector ? connector.hostname : 'duet',
-				name: connector ? `(${connector.hostname})` : 'Duet Web Control 2',
+				hostname: connector ? connector.hostname : 'klipper',
+				name: connector ? `(${connector.hostname})` : 'Klipper Web Control',
 				password: "reprap",
 				interfaces: []
 			},

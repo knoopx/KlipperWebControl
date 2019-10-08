@@ -87,7 +87,7 @@ export default {
 			removeLocalSetting('settings');
 			removeLocalSetting(`machines/${rootState.selectedMachine}`);
 			try {
-				await dispatch('machine/delete', Path.dwcSettingsFile, { root: true });
+				await dispatch('machine/delete', Path.settingsFile, { root: true });
 			} catch (e) {
 				console.warn(e);
 			}
@@ -95,15 +95,15 @@ export default {
 			// Delete cache
 			removeLocalSetting(`cache/${rootState.selectedMachine}`);
 			try {
-				await dispatch('machine/delete', Path.dwcCacheFile, { root: true });
+				await dispatch('machine/delete', Path.cacheFile, { root: true });
 			} catch (e) {
 				console.warn(e);
 			}
 
 			// Check if there is a factory defaults file
 			try {
-				const defaults = await dispatch('machine/download', { filename: Path.dwcFactoryDefaults, showProgress: false, showSuccess: false, showError: false }, { root: true });
-				await dispatch('machine/upload', { filename: Path.dwcSettingsFile, content: new Blob([defaults]), showProgress: false, showSuccess: false }, { root: true });
+				const defaults = await dispatch('machine/download', { filename: Path.factoryDefaults, showProgress: false, showSuccess: false, showError: false }, { root: true });
+				await dispatch('machine/upload', { filename: Path.settingsFile, content: new Blob([defaults]), showProgress: false, showSuccess: false }, { root: true });
 			} catch (e) {
 				// handled before we get here
 			}

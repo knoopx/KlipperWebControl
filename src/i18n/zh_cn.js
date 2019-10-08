@@ -552,12 +552,6 @@ export default {
 			axesNotHomed: '以下轴未归位:|以下轴未归位',
 			noAxes: '没有轴'
 		},
-		settingsAbout: {
-			caption: '关于',
-			developedBy: 'Web界面开发：',
-			for: ' 适用于：',
-			licensedUnder: '中文翻译：宁甲尊， 许可条款：'
-		},
 		settingsAppearance: {
 			caption: '外观',
 			darkTheme: '黑色主题',

@@ -552,12 +552,6 @@ export default {
 			axesNotHomed: 'L\'axe suivant  n\'a pas été à son origine:|Les axes suivants n\'ont pas été à leur origine:',
 			noAxes: 'Pas d\'axes'
 		},
-		settingsAbout: {
-			caption: 'À propos',
-			developedBy: 'Interface web dévelopée par',
-			for: 'pour',
-			licensedUnder: 'Sous licence selon les termes de la'
-		},
 		settingsAppearance: {
 			caption: 'Apparence',
 			darkTheme: 'Thème Sombre',

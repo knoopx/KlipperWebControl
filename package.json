@@ -1,10 +1,9 @@
 {
-  "name": "duetwebcontrol",
+  "name": "klipper-web-control",
   "version": "2.0.2",
-  "repository": "github:chrishamm/DuetWebControl",
-  "homepage": "https://forum.duet3d.com/category/27/duet-web-control",
+  "repository": "github:knoopx/KlipperWebControl",
   "license": "GPL-3.0",
-  "author": "Christian Hammacher <chr.hammacher@gmail.com> (https://chrishamm.io)",
+  "author": "Víctor Martínez <knoopx@gmail.com>",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

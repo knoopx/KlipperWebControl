@@ -2,9 +2,6 @@
 	<v-layout row wrap>
 		<v-flex md5 lg4>
 			<v-layout row wrap>
-				<v-flex xs12>
-					<settings-about-panel></settings-about-panel>
-				</v-flex>
 				<v-flex sm6 md12>
 					<settings-apperance-panel></settings-apperance-panel>
 				</v-flex>

@@ -551,12 +551,6 @@ export default {
 			axesNotHomed: 'The following axis is not homed:|The following axes are not homed:',
 			noAxes: 'No Axes'
 		},
-		settingsAbout: {
-			caption: 'About',
-			developedBy: 'Web Interface developed by',
-			for: 'for',
-			licensedUnder: 'Licensed under the terms of the'
-		},
 		settingsAppearance: {
 			caption: 'Appearance',
 			darkTheme: 'Dark theme',

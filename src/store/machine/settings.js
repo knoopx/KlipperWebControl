@@ -61,7 +61,7 @@ export default function(hostname) {
 
 					try {
 						const content = new Blob([JSON.stringify({ main: rootState.settings, machine: state })]);
-						await dispatch(`machines/${hostname}/upload`, { filename: Path.dwcSettingsFile, content, showProgress: false, showSuccess: false }, { root: true });
+						await dispatch(`machines/${hostname}/upload`, { filename: Path.settingsFile, content, showProgress: false, showSuccess: false }, { root: true });
 					} catch (e) {
 						// handled before we get here
 					}
@@ -75,13 +75,13 @@ export default function(hostname) {
 					}
 				} else {
 					try {
-						const settings = await dispatch(`machines/${hostname}/download`, { filename: Path.dwcSettingsFile, showProgress: false, showSuccess: false, showError: false }, { root: true });
+						const settings = await dispatch(`machines/${hostname}/download`, { filename: Path.settingsFile, showProgress: false, showSuccess: false, showError: false }, { root: true });
 						commit('settings/load', settings.main, { root: true });
 						commit('load', settings.machine);
 					} catch (e) {
 						// may happen if the user has not saved new settings yet
 						try {
-							const settings = await dispatch(`machines/${hostname}/download`, { filename: Path.dwcFactoryDefaults, showProgress: false, showSuccess: false, showError: false }, { root: true });
+							const settings = await dispatch(`machines/${hostname}/download`, { filename: Path.factoryDefaults, showProgress: false, showSuccess: false, showError: false }, { root: true });
 							commit('settings/load', settings.main, { root: true });
 							commit('load', settings.machine);
 						} catch (ex) {

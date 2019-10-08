@@ -551,12 +551,6 @@ export default {
 			axesNotHomed: 'Die folgende Achse ist nicht referenziert:|Die folgenden Achsen sind nicht referenziert:',
 			noAxes: 'Keine Achsen'
 		},
-		settingsAbout: {
-			caption: 'Über',
-			developedBy: 'Weboberfläche entwickelt von',
-			for: 'für',
-			licensedUnder: 'Lizensiert unter den Bedingungen der'
-		},
 		settingsAppearance: {
 			caption: 'Aussehen',
 			darkTheme: 'Dunkles Erscheinungsbild',

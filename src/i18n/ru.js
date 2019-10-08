@@ -551,12 +551,6 @@
 			axesNotHomed: 'Оси не в нулевом положении:',
 			noAxes: 'Нет осей'
 		},
-		settingsAbout: {
-			caption: 'О системе',
-			developedBy: 'Веб интерфейс разработан',
-			for: 'для',
-			licensedUnder: 'Лицензировано на условиях'
-		},
 		settingsAppearance: {
 			caption: 'Внешний вид',
 			darkTheme: 'Тёмная тема',

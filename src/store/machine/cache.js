@@ -48,7 +48,7 @@ export default function(hostname) {
 					cache = getLocalSetting(`cache/${hostname}`);
 				} else {
 					try {
-						cache = await dispatch(`machines/${hostname}/download`, { filename: Path.dwcCacheFile, showProgress: false, showSuccess: false, showError: false });
+						cache = await dispatch(`machines/${hostname}/download`, { filename: Path.cacheFile, showProgress: false, showSuccess: false, showError: false });
 					} catch (e) {
 						// may happen if the user is still using factory defaults
 					}
@@ -70,7 +70,7 @@ export default function(hostname) {
 
 					try {
 						const content = new Blob([JSON.stringify(state)]);
-						dispatch(`machines/${hostname}/upload`, { filename: Path.dwcCacheFile, content, showProgress: false, showSuccess: false });
+						dispatch(`machines/${hostname}/upload`, { filename: Path.cacheFile, content, showProgress: false, showSuccess: false });
 					} catch (e) {
 						// handled before we get here
 					}

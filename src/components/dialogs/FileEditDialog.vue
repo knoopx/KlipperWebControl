@@ -46,12 +46,6 @@
 				<v-spacer></v-spacer>
 
 				<v-toolbar-items>
-					<v-btn v-if="showGCodeHelp" dark flat href="https://duet3d.dozuki.com/Wiki/Gcode" target="_blank">
-						<v-icon class="mr-1">help</v-icon> {{ $t('dialog.fileEdit.gcodeReference') }}
-					</v-btn>
-					<v-btn v-if="showDisplayHelp" dark flat href="https://duet3d.dozuki.com/Wiki/Duet_2_Maestro_12864_display_menu_system" target="_blank">
-						<v-icon class="mr-1">help</v-icon> {{ $t('dialog.fileEdit.menuReference') }} 
-					</v-btn>
 					<v-btn dark flat @click="save">
 						<v-icon class="mr-1">save</v-icon> {{ $t('dialog.fileEdit.save') }}
 					</v-btn>
