@@ -20,7 +20,7 @@ export default function(hostname) {
 
 			// UI
 			babystepAmount: 0.05,						// mm
-			codes: ['M0', 'M1', 'M84'],
+			codes: [],
 			displayedExtraTemperatures: [],
 			displayedExtruders: [0, 1],
 			displayedFans: [-1],
