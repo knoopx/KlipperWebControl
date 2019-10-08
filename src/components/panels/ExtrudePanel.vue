@@ -154,7 +154,7 @@ export default {
 			this.busy = true;
 			try {
 				const amount = amounts.map(amount => extrude ? amount : -amount).reduce((a, b) => `${a}:${b}`);
-				await this.sendCode(`M120\nM83\nG1 E${amount} F${this.feedrate * 60}\nM121`);
+				await this.sendCode(`M83\nG1 E${amount} F${this.feedrate * 60}`);
 			} catch (e) {
 				// handled before we get here
 			}
