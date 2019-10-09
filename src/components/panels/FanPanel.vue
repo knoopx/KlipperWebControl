@@ -69,11 +69,11 @@ export default {
 				return 0;
 			},
 			set(value) {
-				value = Math.min(100, Math.max(0, value)) / 100;
+				value = (Math.min(255, Math.max(0, value)) / 100 * 255).toFixed(2);
 				if (this.fan === -1) {
-					this.sendCode(`M106 S${value.toFixed(2)}`);
+					this.sendCode(`M106 S${value}`);
 				} else {
-					this.sendCode(`M106 P${this.fan} S${value.toFixed(2)}`);
+					this.sendCode(`M106 P${this.fan} S${value}`);
 				}
 			}
 		}

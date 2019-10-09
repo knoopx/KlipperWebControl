@@ -29,7 +29,7 @@
 				</v-list>
 			</v-menu>
 		</v-card-title>
-		
+
 		<v-layout v-if="visibleFans.length" column class="px-3">
 			<v-flex v-for="fan in visibleFans" :key="fan" class="pt-2">
 				<span>
@@ -79,10 +79,11 @@ export default {
 			return this.fans.length ? Math.round(this.fans[(fan === -1) ? this.toolFan : fan].value * 100) : 0;
 		},
 		setFanValue(fan, value) {
+			value = (Math.min(255, Math.max(0, value)) / 100 * 255).toFixed(2);
 			if (fan === -1) {
-				this.sendCode(`M106 S${value / 100}`);
+				this.sendCode(`M106 S${value}`);
 			} else {
-				this.sendCode(`M106 P${fan} S${value / 100}`);
+				this.sendCode(`M106 P${fan} S${value}`);
 			}
 		}
 	}
