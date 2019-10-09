@@ -137,7 +137,6 @@ export class FileInfo {
 	filament = []
 	generatedBy = ''
 	printTime = 0
-	simulatedTime = 0
 }
 
 export class Firmware {

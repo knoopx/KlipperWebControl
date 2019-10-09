@@ -36,23 +36,13 @@
 						</v-flex>
 					</v-layout>
 				</v-flex>
-				<v-flex v-show="job.file.printTime && !isSimulating">
+				<v-flex v-show="job.file.printTime">
 					<v-layout column>
 						<v-flex tag="strong" class="px-1">
 							{{ $t('panel.jobEstimations.slicer') }}
 						</v-flex>
 						<v-flex>
 							{{ $displayTime(isPrinting ? Math.max(0, job.file.printTime - job.duration) : job.file.printTime) }}
-						</v-flex>
-					</v-layout>
-				</v-flex>
-				<v-flex v-show="job.file.simulatedTime && !isSimulating">
-					<v-layout column>
-						<v-flex tag="strong" class="px-1">
-							{{ $t('panel.jobEstimations.simulation') }}
-						</v-flex>
-						<v-flex>
-							{{ $displayTime(isPrinting ? Math.max(0, job.file.simulatedTime - job.duration) : job.file.simulatedTime) }}
 						</v-flex>
 					</v-layout>
 				</v-flex>
@@ -69,7 +59,7 @@ import { mapState, mapGetters } from 'vuex'
 export default {
 	computed: {
 		...mapState('machine/model', ['job']),
-		...mapGetters('machine/model', ['isPrinting', 'isSimulating'])
+		...mapGetters('machine/model', ['isPrinting'])
 	}
 }
 </script>

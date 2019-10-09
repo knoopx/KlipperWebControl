@@ -84,7 +84,6 @@ export default function(connector) {
 				lastFileName: null,
 				lastFileAborted: false,
 				lastFileCancelled: false,
-				lastFileSimulated: false,
 
 				extrudedRaw: [],						// virtual amount extruded without any modifiers like mixing or extrusion factors
 				duration: null,
@@ -192,7 +191,7 @@ export default function(connector) {
 				logFile: null,
 				mode: null,								// one of ['FFF', 'CNC', 'Laser', null (exclusive in DWC)]
 				status: null							// one of the following:
-				// ['updating', 'off', 'halted', 'pausing', 'paused', 'resuming', 'processing', 'simulating', 'busy', 'changingTool', 'idle', null]
+				// ['updating', 'off', 'halted', 'pausing', 'paused', 'resuming', 'processing', 'busy', 'changingTool', 'idle', null]
 			},
 			storages: [],
 			tools: [
@@ -222,8 +221,7 @@ export default function(connector) {
 				return null;
 			},
 			fractionPrinted: state => (state.job.filePosition && state.job.file.size) ? state.job.filePosition / state.job.file.size : 0,
-			isPrinting: state => ['pausing', 'paused', 'resuming', 'processing', 'simulating'].indexOf(state.state.status) !== -1,
-			isSimulating: state => state.state.status === 'simulating',
+			isPrinting: state => ['pausing', 'paused', 'resuming', 'processing'].indexOf(state.state.status) !== -1,
 			isPaused: state => ['pausing', 'paused', 'resuming'].indexOf(state.state.status) !== -1,
 			maxHeaterTemperature(state) {
 				let maxTemp
@@ -236,7 +234,7 @@ export default function(connector) {
 			},
 			jobProgress(state, getters) {
 				if (getters.isPrinting) {
-					if (!getters.isSimulating && state.job.file.filament.length && state.job.extrudedRaw.length) {
+					if (state.job.file.filament.length && state.job.extrudedRaw.length) {
 						return Math.min(1, state.job.extrudedRaw.reduce((a, b) => a + b) / state.job.file.filament.reduce((a, b) => a + b));
 					}
 					return getters.fractionPrinted;

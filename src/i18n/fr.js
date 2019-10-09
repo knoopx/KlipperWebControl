@@ -268,7 +268,6 @@ export default {
 			resuming: 'Reprise',
 			printing: 'Impression',
 			processing: 'Traitement',
-			simulating: 'Simulation',
 			busy: 'Occupé',
 			changingTool: 'Changement d\'Outil',
 			idle: 'Au repos',
@@ -292,8 +291,6 @@ export default {
 		addRPM: 'Valeur du nouveau preset'
 	},
 	jobProgress: {
-		simulating: 'Simulation {0}, {1} complète',
-		simulated: 'Simulation {0}, 100 % complète',
 		processing: 'Traitement {0}, {1} complet',
 		processed: 'Traitement {0}, 100 % complet',
 		printing: 'Impression {0}, {1} complète',
@@ -343,12 +340,9 @@ export default {
 			layerHeight: 'Hauteur de Couche',
 			filament: 'Utilisation de Filament',
 			printTime: 'Temps d\'Impression',
-			simulatedTime: 'Temps Simulé',
 			generatedBy: 'Généré par',
-
 			noJobs: 'Aucun Travail',
 			start: 'Lancer Fichier',
-			simulate: 'Simuler Fichier'
 		},
 		sys: {
 			noFiles: 'Aucun Fichiers Système'
@@ -504,16 +498,12 @@ export default {
 			caption: 'Contrôle du Travail',
 			cancelJob: 'Annuler Travail',
 			cancelPrint: 'Annuler Impression',
-			cancelSimulation: 'Annuler Simulation',
 			pauseJob: 'Pause Travail',
 			pausePrint: 'Pause Impression',
-			pauseSimulation: 'Pause Simulation',
 			resumeJob: 'Reprendre  Travail',
 			resumePrint: 'Reprendre Impression',
-			resumeSimulation: 'Reprendre Simulation',
 			repeatJob: 'Recommencer',
 			repeatPrint: 'Réimprimer',
-			repeatSimulation: 'Simuler à Nouveau',
 			autoSleep: 'Activer Veille Automatique'
 		},
 		jobData: {
@@ -529,7 +519,6 @@ export default {
 			file: 'Progrès du Fichier',
 			layer: 'Durée de la Dernière Couche',
 			slicer: 'Trancheur',
-			simulation: 'Simulation'
 		},
 		jobInfo: {
 			caption: 'Information du Travail',

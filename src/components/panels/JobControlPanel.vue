@@ -32,24 +32,18 @@ export default {
 		...mapState('machine', ['autoSleep']),
 		...mapState('machine/model', ['job', 'state']),
 		...mapGetters(['uiFrozen']),
-		...mapGetters('machine/model', ['isPaused', 'isPrinting', 'isSimulating']),
+		...mapGetters('machine/model', ['isPaused', 'isPrinting']),
 		autoSleepActive: {
 			get() { return this.autoSleep; },
 			set(value) { this.setAutoSleep(value) }
 		},
 		pauseResumeText() {
-			if (this.isSimulating) {
-				return this.$t(this.isPaused ? 'panel.jobControl.resumeSimulation' : 'panel.jobControl.pauseSimulation');
-			}
 			if (this.state.mode === 'FFF') {
 				return this.$t(this.isPaused ? 'panel.jobControl.resumePrint' : 'panel.jobControl.pausePrint');
 			}
 			return this.$t(this.isPaused ? 'panel.jobControl.resumeJob' : 'panel.jobControl.pauseJob');
 		},
 		cancelText() {
-			if (this.isSimulating) {
-				return this.$t('panel.jobControl.cancelSimulation');
-			}
 			if (this.state.mode === 'FFF') {
 				return this.$t('panel.jobControl.cancelPrint');
 			}
@@ -57,17 +51,11 @@ export default {
 		},
 		processAnotherCode() {
 			if (this.job.lastFileName) {
-				if (this.job.lastFileSimulated) {
-					return `M37 P"${this.job.lastFileName}"`;
-				}
 				return `M32 "${this.job.lastFileName}"`;
 			}
 			return undefined;
 		},
 		processAnotherText() {
-			if (this.job.lastFileSimulated) {
-				return this.$t('panel.jobControl.repeatSimulation');
-			}
 			if (this.state.mode === 'FFF') {
 				return this.$t('panel.jobControl.repeatPrint');
 			}

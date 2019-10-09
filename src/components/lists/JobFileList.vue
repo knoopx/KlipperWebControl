@@ -14,16 +14,13 @@
 			</v-btn>
 			<upload-btn class="hidden-sm-and-down" :directory="directory" target="gcodes" color="primary"></upload-btn>
 		</v-toolbar>
-		
+
 		<base-file-list ref="filelist" v-model="selection" :headers="headers" :directory.sync="directory" :filelist.sync="filelist" :loading.sync="loading" sort-table="jobs" @directoryLoaded="directoryLoaded" @fileClicked="fileClicked" no-files-text="list.jobs.noJobs">
 			<v-progress-linear slot="progress" :indeterminate="fileinfoProgress === -1" :value="(fileinfoProgress / filelist.length) * 100"></v-progress-linear>
 
 			<template slot="context-menu">
 				<v-list-tile v-show="isFile && !isPrinting" @click="start">
 					<v-icon class="mr-1">play_arrow</v-icon> {{ $t('list.jobs.start') }}
-				</v-list-tile>
-				<v-list-tile v-show="isFile && !isPrinting" @click="simulate">
-					<v-icon class="mr-1">fast_forward</v-icon> {{ $t('list.jobs.simulate') }}
 				</v-list-tile>
 			</template>
 		</base-file-list>
@@ -111,11 +108,6 @@ export default {
 					unit: 'time'
 				},
 				{
-					text: () => i18n.t('list.jobs.simulatedTime'),
-					value: 'simulatedTime',
-					unit: 'time'
-				},
-				{
 					text: () => i18n.t('list.jobs.generatedBy'),
 					value: 'generatedBy'
 				}
@@ -194,7 +186,6 @@ export default {
 							file.filament = fileInfo.filament;
 							file.generatedBy = fileInfo.generatedBy;
 							file.printTime = fileInfo.printTime ? fileInfo.printTime : null;
-							file.simulatedTime = fileInfo.simulationTime ? fileInfo.simulatedTime : null;
 
 							// Update progress
 							this.fileinfoProgress = fileIndex;
@@ -205,7 +196,6 @@ export default {
 							file.filament = [];
 							file.generatedBy = null;
 							file.printTime = null;
-							file.simulatedTime = null;
 
 							// Deal with the error. If the connection has been terminated, the next call will invalidate everything
 							if (!(e instanceof DisconnectedError) && !(e instanceof InvalidPasswordError)) {
@@ -235,7 +225,6 @@ export default {
 						item.filament = null;
 						item.generatedBy = null;
 						item.printTime = null;
-						item.simulatedTime = null;
 					}
 				});
 
@@ -252,9 +241,6 @@ export default {
 		},
 		start(item) {
 			this.sendCode(`M32 "${Path.combine(this.directory, (item && item.name) ? item.name : this.selection[0].name)}"`);
-		},
-		simulate(item) {
-			this.sendCode(`M37 P"${Path.combine(this.directory, (item && item.name) ? item.name : this.selection[0].name)}"`);
 		}
 	}
 }

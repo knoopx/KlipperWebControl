@@ -267,7 +267,6 @@
 			resuming: 'Возобновление',
 			printing: 'Печать',
 			processing: 'Обработка',
-			simulating: 'Симуляция',
 			busy: 'Занят',
 			changingTool: 'Смена устройства',
 			idle: 'Ожидание',
@@ -291,8 +290,6 @@
 		addRPM: 'Новое значение RPM'
 	},
 	jobProgress: {
-		simulating: 'Симуляция {0}, {1} завершена',
-		simulated: 'СИмуляция {0}, 100%',
 		processing: 'Обработка {0}, {1} завершена',
 		processed: 'Обработка {0}, 100%',
 		printing: 'Печать {0}, {1} завершена',
@@ -342,12 +339,9 @@
 			layerHeight: 'Выота слоя',
 			filament: 'Использовано филамента',
 			printTime: 'Время печати',
-			simulatedTime: 'Время симуляции',
 			generatedBy: 'Слайсер',
-
 			noJobs: 'Нет заданий',
 			start: 'Старт файла',
-			simulate: 'Симулировать'
 		},
 		sys: {
 			noFiles: 'Нет системных файлов'
@@ -503,16 +497,12 @@
 			caption: 'Контроль задания',
 			cancelJob: 'Отменить задание',
 			cancelPrint: 'Отменить печать',
-			cancelSimulation: 'Отменить симуляцию',
 			pauseJob: 'Приостановить',
 			pausePrint: 'Пауза печати',
-			pauseSimulation: 'Пауза симуляции',
 			resumeJob: 'Продолжить задание',
 			resumePrint: 'Продолжить печать',
-			resumeSimulation: 'Продолжить симуляцию',
 			repeatJob: 'Запустить снова',
 			repeatPrint: 'Печатать снова',
-			repeatSimulation: 'Симулировать снова',
 			autoSleep: 'Включить авто сон'
 		},
 		jobData: {
@@ -528,7 +518,6 @@
 			file: 'Финиш через',
 			layer: 'Время слоя',
 			slicer: 'Слайсер',
-			simulation: 'Симуляция'
 		},
 		jobInfo: {
 			caption: 'Инфо о задании',

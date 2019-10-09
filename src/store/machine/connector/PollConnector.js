@@ -217,7 +217,6 @@ export default class PollConnector extends BaseConnector {
 	async updateLoop(requestExtendedStatus = false) {
 		// Decide which type of status update to poll and request it
 		const wasPrinting = ['D', 'S', 'R', 'P', 'M'].indexOf(this.lastStatusResponse.status) !== -1;
-		const wasSimulating = this.lastStatusResponse.status === 'M';
 		const statusType =
 			requestExtendedStatus ||
 			this.justConnected ||
@@ -255,7 +254,6 @@ export default class PollConnector extends BaseConnector {
 			quickPatch(newData, {
 				job: {
 					lastFileName: this.currentFileInfo.fileName,
-					lastFileSimulated: wasSimulating
 				}
 			});
 		}
@@ -639,7 +637,6 @@ export default class PollConnector extends BaseConnector {
 			case 'S': return 'paused';
 			case 'R': return 'resuming';
 			case 'P': return 'processing';
-			case 'M': return 'simulating';
 			case 'B': return 'busy';
 			case 'T': return 'changingTool';
 			case 'I': return 'idle';

@@ -269,7 +269,6 @@ export default {
 			resuming: '正在恢复',
 			printing: '正在打印',
 			processing: '正在处理',
-			simulating: '正在模拟',
 			busy: '忙',
 			changingTool: '改变工具',
 			idle: '空闲',
@@ -293,8 +292,6 @@ export default {
 		addRPM: '新的转速值'
 	},
 	jobProgress: {
-		simulating: '正在模拟{0}, {1} 完成',
-		simulated: '已模拟{0}, 100 % 完成',
 		processing: '正在处理{0}, {1}完成',
 		processed: '已处理{0}, 100 % 完成',
 		printing: '正在打印{0}, {1}完成',
@@ -343,12 +340,9 @@ export default {
 			layerHeight: '层高度',
 			filament: '细丝用量',
 			printTime: '打印时间',
-			simulatedTime: '模拟时间',
 			generatedBy: '生成由',
-
 			noJobs: '没有任务',
 			start: '开始任务文件',
-			simulate: '模拟文件'
 		},
 		sys: {
 			noFiles: '没有系统文件'
@@ -504,16 +498,12 @@ export default {
 			caption: '任务控制',
 			cancelJob: '取消任务',
 			cancelPrint: '取消打印',
-			cancelSimulation: '取消模拟',
 			pauseJob: '暂停任务',
 			pausePrint: '暂停打印',
-			pauseSimulation: '暂停模拟',
 			resumeJob: '恢复任务',
 			resumePrint: '恢复打印',
-			resumeSimulation: '恢复模拟',
 			repeatJob: '重新开始',
 			repeatPrint: '重新打印',
-			repeatSimulation: '重新模拟',
 			autoSleep: '启用自动睡眠'
 		},
 		jobData: {
@@ -529,7 +519,6 @@ export default {
 			file: '文件进度',
 			layer: '层时间',
 			slicer: '切片',
-			simulation: '模拟'
 		},
 		jobInfo: {
 			caption: '任务信息',

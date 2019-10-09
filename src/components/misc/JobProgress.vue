@@ -26,21 +26,15 @@ import { extractFileName } from '../../utils/path.js'
 export default {
 	computed: {
 		...mapState('machine/model', ['job', 'state']),
-		...mapGetters('machine/model', ['isPrinting', 'isSimulating', 'jobProgress']),
+		...mapGetters('machine/model', ['isPrinting', 'jobProgress']),
 		printStatus() {
 			if (this.isPrinting) {
 				const progress = this.$display(this.jobProgress * 100, 1, '%');
-				if (this.isSimulating) {
-					return this.$t('jobProgress.simulating', [this.printFile, progress]);
-				}
 				if (this.state.mode === 'FFF') {
 					return this.$t('jobProgress.printing', [this.printFile, progress]);
 				}
 				return this.$t('jobProgress.processing', [this.printFile, progress]);
 			} else if (this.job.lastFileName) {
-				if (this.job.lastFileSimulated) {
-					return this.$t('jobProgress.simulated', [this.job.lastFileName]);
-				}
 				if (this.state.mode === 'FFF') {
 					return this.$t('jobProgress.printed', [this.job.lastFileName]);
 				}

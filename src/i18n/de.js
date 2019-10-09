@@ -267,7 +267,6 @@ export default {
             resuming: 'Wiederaufnahme',
 			printing: 'Drucke',
 			processing: 'Verarbeite',
-			simulating: 'Simuliere',
 			busy: 'Beschäftigt',
 			changingTool: 'Wechsle Werkzeug',
 			idle: 'Leerlauf',
@@ -291,8 +290,6 @@ export default {
 		addRPM: 'Wert der neuen Vorlage'
 	},
 	jobProgress: {
-		simulating: 'Simuliere {0}, {1} abgeschlossen',
-		simulated: 'Simulation von {0}, 100 % abgeschlossen',
 		processing: 'Verarbeite {0}, {1} abgeschlossen',
 		processed: 'Verarbeitung von {0}, 100 % abgeschlossen',
 		printing: 'Drucke {0}, {1} abgeschlossen',
@@ -342,12 +339,9 @@ export default {
 			layerHeight: 'Schichtdicke',
 			filament: 'Filamentverbrauch',
 			printTime: 'Druckdauer',
-			simulatedTime: 'Simulierte Dauer',
 			generatedBy: 'Erstellt durch',
-
 			noJobs: 'Keine Aufträge',
 			start: 'Datei starten',
-			simulate: 'Datei simulieren'
 		},
 		sys: {
 			noFiles: 'Keine Systemdateien'
@@ -503,16 +497,12 @@ export default {
 			caption: 'Auftragskontrolle',
 			cancelJob: 'Auftrag abbrechen',
 			cancelPrint: 'Druck abbrechen',
-			cancelSimulation: 'Simulation abbrechen',
 			pauseJob: 'Auftrag pausieren',
 			pausePrint: 'Druck pausieren',
-			pauseSimulation: 'Simulation pausieren',
 			resumeJob: 'Auftrag wiederaufnehmen',
 			resumePrint: 'Druck wiederaufnehmennt',
-			resumeSimulation: 'Simulation wiederaufnehmen',
 			repeatJob: 'Nochmal starten',
 			repeatPrint: 'Nochmal drucken',
-			repeatSimulation: 'Nochmal simulieren',
 			autoSleep: 'Auto-Schlaf aktivieren'
 		},
 		jobData: {
@@ -528,7 +518,6 @@ export default {
 			file: 'Dateifortschritt',
 			layer: 'Schichtdauer',
 			slicer: 'Slicer',
-			simulation: 'Simulation'
 		},
 		jobInfo: {
 			caption: 'Jobinformationen',
