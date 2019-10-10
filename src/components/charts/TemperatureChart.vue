@@ -102,7 +102,6 @@ function pushSeriesData(machine, heaterIndex, heater, extra) {
 function isHeaterConfigured(state, machine, heaterIndex) {
 	if (state.machines[machine].model.tools.some(tool => tool.heaters.indexOf(heaterIndex) !== -1)) { return true; }
 	if (state.machines[machine].model.heat.beds.some(bed => bed && bed.heaters.indexOf(heaterIndex) !== -1)) { return true; }
-	if (state.machines[machine].model.heat.chambers.some(chamber => chamber && chamber.heaters.indexOf(heaterIndex) !== -1)) { return true; }
 	return false;
 }
 

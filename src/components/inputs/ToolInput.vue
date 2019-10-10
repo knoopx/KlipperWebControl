@@ -18,7 +18,7 @@ export default {
 	computed: {
 		...mapGetters(['uiFrozen']),
 		...mapState('machine/model', ['heat', 'tools']),
-		...mapState('machine/settings', ['spindleRPM', 'temperatures']),
+		...mapState('machine/settings', ['temperatures']),
 		items() {
 			const key = 'active';
 			if (this.tool || this.all) {
@@ -26,12 +26,6 @@ export default {
 			}
 			if (this.bed) {
 				return this.temperatures.bed[key];
-			}
-			if (this.chamber) {
-				return this.temperatures.chamber;
-			}
-			if (this.spindle) {
-				return this.spindleRPM;
 			}
 
 			console.warn('[tool-input] Failed to retrieve temperature presets');
@@ -56,11 +50,6 @@ export default {
 		tool: Object,
 		bed: Object,
 		bedIndex: Number,
-		chamber: Object,
-		chamberIndex: Number,
-
-		spindle: Object,
-		spindleIndex: Number
 	},
 	methods: {
 		...mapActions('machine', ['sendCode']),
@@ -70,14 +59,7 @@ export default {
 			if (!this.applying && this.isNumber(this.value)) {
 				this.applying = true;
 				try {
-					if (this.spindle) {
-						// Set Spindle RPM
-						if (this.value >= 0) {
-							this.sendCode(`M3 P${this.spindleIndex} S${this.value}`);
-						} else {
-							this.sendCode(`M4 P${this.spindleIndex} S${-this.value}`);
-						}
-					} else if (this.value >= -273.15 && this.value <= 1999) {
+					if (this.value >= -273.15 && this.value <= 1999) {
 						if (this.tool) {
 							// Set tool temp
 							const currentTemps = this.tool['active'];
@@ -90,12 +72,6 @@ export default {
 							const value = this.value, heaterIndex = this.heaterIndex;
 							const newTemps = currentTemps.map((temp, i) => (i === heaterIndex) ? value : temp).reduce((a, b) => `${a}:${b}`);
 							await this.sendCode(`M140 P${this.bedIndex} S${newTemps}`);
-						} else if (this.chamber) {
-							// Set chamber tem
-							const currentTemps = this.chamber[this.active ? 'active' : 'standby'];
-							const value = this.value, heaterIndex = this.heaterIndex;
-							const newTemps = currentTemps.map((temp, i) => (i === heaterIndex) ? value : temp).reduce((a, b) => `${a}:${b}`);
-							await this.sendCode(`M141 P${this.chamberIndex} S${newTemps}`);
 						} else if (this.all) {
 							// Set all temps
 							let code = '';
@@ -110,12 +86,6 @@ export default {
 								if (bed && bed.heaters.length) {
 									const temps = bed.heaters.map(() => targetTemp).reduce((a, b) => a + ':' + b);
 									code += `M140 P${index} S${temps}\n`;
-								}
-							}, this);
-							this.heat.chambers.forEach(function(chamber, index) {
-								if (chamber && chamber.heaters.length) {
-									const temps = chamber.heaters.map(() => targetTemp).reduce((a, b) => a + ':' + b);
-									code += `M141 P${index} S${temps}\n`;
 								}
 							}, this);
 							await this.sendCode(code);
@@ -161,10 +131,6 @@ export default {
 			this.value = this.tool['active'][this.heaterIndex];
 		} else if (this.bed) {
 			this.value = this.bed['active'][this.heaterIndex];
-		} else if (this.chamber) {
-			this.value = this.chamber['active'][this.heaterIndex];
-		} else if (this.spindle) {
-			this.value = this.spindle.active;
 		}
 		this.actualValue = this.value;
 	},
@@ -187,23 +153,6 @@ export default {
 				}
 			}
 		},
-		'chamber.active'(to) {
-			const val = (to instanceof Array) ? to[this.heaterIndex] : to;
-			if (this.active && this.actualValue !== val) {
-				this.actualValue = val;
-				if (document.activeElement !== this.input) {
-					this.value = val;
-				}
-			}
-		},
-		'spindle.active'(to) {
-			if (this.active && this.actualValue !== to) {
-				this.actualValue = to;
-				if (document.activeElement !== this.input) {
-					this.value = to;
-				}
-			}
-		}
 	}
 }
 </script>

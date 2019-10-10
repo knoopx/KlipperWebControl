@@ -271,14 +271,6 @@ export default class PollConnector extends BaseConnector {
 						active: [response.data.temps.bed.active],
 					} : null
 				],
-				chambers: [
-					response.data.temps.chamber ? {
-						active: [response.data.temps.chamber.active],
-					} : null,
-					response.data.temps.cabinet ? {
-						active: [response.data.temps.cabinet.active],
-					} : null
-				],
 				extra: response.data.temps.extra.map((extraHeater) => ({
 					current: extraHeater.temp,
 					name: extraHeater.name
@@ -347,14 +339,6 @@ export default class PollConnector extends BaseConnector {
 					beds: [
 						response.data.temps.bed ? {
 							heaters: [response.data.temps.bed.heater]
-						} : null
-					],
-					chambers: [
-						response.data.temps.chamber ? {
-							heaters: [response.data.temps.chamber.heater]
-						} : null,
-						response.data.temps.cabinet ? {
-							heaters: [response.data.temps.cabinet.heater]
 						} : null
 					],
 					coldExtrudeTemperature: response.data.coldExtrudeTemp,
@@ -508,11 +492,6 @@ export default class PollConnector extends BaseConnector {
 			}
 		}
 
-		// Remove unused chamber heaters
-		while (newData.heat.chambers.length > 0 && newData.heat.chambers[newData.heat.chambers.length - 1] === null) {
-			newData.heat.chambers.pop();
-		}
-
 		// Output Utilities
 		let beepFrequency = 0, beepDuration = 0, displayMessage = "", msgBoxMode = null;
 		if (response.data.output) {
@@ -555,20 +534,6 @@ export default class PollConnector extends BaseConnector {
 				displayMessage: displayMessage
 			}
 		});
-
-		// Spindles
-		if (response.data.spindles) {
-			quickPatch(newData, {
-				spindles: response.data.spindles.map(spindle => ({
-					active: spindle.active,
-					current: spindle.current
-				}))
-			});
-
-			response.data.spindles.forEach((spindle, index) => {
-				newData.tools.find(tool => tool.number === spindle.tool).spindle = index;
-			});
-		}
 
 		// See if we need to pass some info from the connect response
 		if (this.justConnected) {

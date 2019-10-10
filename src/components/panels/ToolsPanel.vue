@@ -94,13 +94,9 @@ table.extra tr > td:first-child {
 									<span v-if="tool.heaters.length">
 										{{ formatHeaterValue(heat.heaters[tool.heaters[0]]) }}
 									</span>
-									<span v-else-if="isNumber(tool.spindle) && tool.spindle >= 0 && tool.spindle < spindles.length">
-										{{ $display(spindles[tool.spindle].current, 0, $t('generic.rpm')) }}
-									</span>
 								</td>
 								<td class="pl-2 pr-2">
 									<tool-input v-if="tool.heaters.length" :tool="tool" :heaterIndex="0" active></tool-input>
-									<tool-input v-else-if="isNumber(tool.spindle) && tool.spindle >= 0" :spindle="spindles[tool.spindle]" active></tool-input>
 								</td>
 							</tr>
 
@@ -182,60 +178,6 @@ table.extra tr > td:first-child {
 								</tr>
 							</template>
 						</template>
-
-						<!-- Chambers -->
-						<template v-for="(chamber, index) in heat.chambers">
-							<template v-if="chamber">
-								<tr :key="`div-${index}`">
-									<td colspan="5">
-										<v-divider></v-divider>
-									</td>
-								</tr>
-
-								<tr :key="`chamber-${index}-${chamber.heaters.length && chamber.heaters[0]}`">
-									<th :rowspan="Math.max(1, chamber.heaters.length)" class="pl-2" :class="{ 'pt-2 pb-2' : !chamber.heaters.length}">
-										<a href="#" @click.prevent="chamberClick(chamber, index)">
-											{{ chamber.name || $t('panel.tools.chamber', [(heat.chambers.length !== 1) ? index : '']) }}
-										</a>
-									</th>
-
-									<th>
-										<a v-if="chamber.heaters.length > 0" href="#" :class="getHeaterColor(chamber.heaters[0])" @click.prevent="chamberHeaterClick(chamber, index, chamber.heaters[0])">
-											{{ formatHeaterName(heat.heaters[chamber.heaters[0]], chamber.heaters[0]) }}
-										</a>
-										<br/>
-										<span v-if="chamber.heaters.length > 0 && heat.heaters[chamber.heaters[0]].state !== null" class="font-weight-regular caption">
-											{{ $t(`generic.heaterStates[${heat.heaters[chamber.heaters[0]].state}]`) }}
-										</span>
-									</th>
-									<td class="text-center">
-										<span v-if="chamber.heaters.length > 0">
-											{{ formatHeaterValue(heat.heaters[chamber.heaters[0]]) }}
-										</span>
-									</td>
-									<td class="pl-2 pr-2">
-										<tool-input v-if="chamber.heaters.length" :chamber="chamber" :chamberIndex="index" :heaterIndex="0" active></tool-input>
-									</td>
-								</tr>
-								<tr v-for="(heater, heaterIndex) in chamber.heaters.slice(1)" :key="`chamber-${index}-${heater}`">
-									<th>
-										<a href="#" :class="getHeaterColor(heater)" @click.prevent="chamberHeaterClick(chamber, index, heater)">
-											{{ formatHeaterName(heat.heaters[heater], heater) }}
-										</a>
-										<br/>
-										<span v-if="heat.heaters[heater].state !== null" class="font-weight-regular caption">
-											{{ $t(`generic.heaterStates[${heat.heaters[heater].state}]`) }}
-										</span>
-									</th>
-									<td>
-										{{ formatHeaterValue(heat.heaters[heater]) }}
-									</td>
-									<td class="pl-2 pr-2">
-										<tool-input :chamber="chamber" :chamberIndex="index" :heaterIndex="heaterIndex + 1" active></tool-input>
-									</td>
-								</tr>
-							</template>
-						</template>
 					</tbody>
 				</table>
 				<v-alert :value="!tools.length" type="info">
@@ -297,7 +239,7 @@ import { DisconnectedError } from '../../utils/errors.js'
 export default {
 	computed: {
 		...mapGetters(['isConnected', 'uiFrozen']),
-		...mapState('machine/model', ['heat', 'state', 'spindles', 'tools']),
+		...mapState('machine/model', ['heat', 'state', 'tools']),
 		...mapState('machine/settings', ['displayedExtraTemperatures']),
 		...mapState('settings', ['darkTheme']),
 		canTurnEverythingOff() {
@@ -349,11 +291,6 @@ export default {
 			this.heat.beds.forEach(function(bed, index) {
 				if (bed && bed.heaters.length) {
 					code += `M140 P${index} S-273.15\n`;
-				}
-			});
-			this.heat.chambers.forEach(function(chamber, index) {
-				if (chamber && chamber.heaters.length) {
-					code += `M141 P${index} S-273.15\n`;
 				}
 			});
 
@@ -494,38 +431,6 @@ export default {
 					break;
 			}
 		},
-
-		chamberClick(chamber, chamberIndex) {
-			if (chamber.heaters.length) {
-				// There is no special action for clicking Chamber yet
-				this.chamberHeaterClick(chamber, chamberIndex, chamber.heaters[0]);
-			}
-		},
-		chamberHeaterClick(chamber, chamberIndex, heater) {
-			if (!this.isConnected) {
-				return;
-			}
-
-			let temps;
-			switch (this.heat.heaters[heater].state) {
-				case 0:		// Off -> Active
-					temps = (chamber.active instanceof Array) ? chamber.active.reduce((a, b) => `${a}:${b}`) : chamber.active;
-					this.sendCode(`M141 P${chamberIndex} S${temps}`);
-					break;
-
-				// Standby mode for chambers is not officially supported yet (there's no code for standby control)
-
-				case 3:		// Fault -> Ask for reset
-					this.faultyHeater = heater;
-					this.resetHeaterFault = true;
-					break;
-
-				default:	// Active -> Off
-					temps = (chamber.active instanceof Array) ? chamber.active.map(() => '-273.15').reduce((a, b) => `${a}:${b}`) : '-273.15';
-					this.sendCode(`M141 P${chamberIndex} S${temps}`);
-					break;
-			}
-		}
 	}
 }
 </script>

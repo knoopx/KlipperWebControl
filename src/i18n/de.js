@@ -581,8 +581,6 @@ export default {
 			caption: 'Listeneinträge',
 			toolTemperatures: 'Werkzeugtemperaturen',
 			bedTemperatures: 'Betttemperaturen',
-			chamberTemperatures: 'Kammertemperaturen',
-			spindleRPM: 'Spindel-RPM'
 		},
 		settingsMachine: {
 			caption: 'Maschinenspezifisch',
@@ -645,7 +643,6 @@ export default {
 			active: 'Aktiv',
 			standby: 'Standby',
 			bed: 'Bett {0}',
-			chamber: 'Kammer {0}',
 			extra: {
 				caption: 'Extra',
 				sensor: 'Sensor',

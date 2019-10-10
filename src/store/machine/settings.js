@@ -42,9 +42,7 @@ export default function(hostname) {
 					active: [110, 100, 90, 70, 65, 60, 0],
 					standby: [40, 30, 0]
 				},
-				chamber: [90, 80, 70, 60, 50, 40, 0]
-			},
-			spindleRPM: [10000, 75000, 5000, 2500, 1000, 0]
+			}
 		},
 		getters: {
 			moveSteps: state => function(axis) {

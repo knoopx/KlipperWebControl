@@ -41,7 +41,6 @@ export default function(connector) {
 						heaters: [0]
 					})
 				],
-				chambers: [],							// same structure as 'beds'
 				coldExtrudeTemperature: 160,
 				coldRetractTemperature: 90,
 				extra: [
@@ -157,7 +156,6 @@ export default function(connector) {
 				]
 				// sensors: []							// TODO thermistors etc
 			},
-			spindles: [],
 			state: {
 				atxPower: null,
 				beep: {

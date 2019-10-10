@@ -215,12 +215,6 @@ export class Probe {
 	persistent = false
 }
 
-export class Spindle {
-	constructor(initData) { quickPatch(this, initData); }
-	active = 0					// RPM
-	current = 0					// RPM
-}
-
 export class Storage {
 	constructor(initData) { quickPatch(this, initData); }
 	mounted = false
@@ -243,7 +237,6 @@ export class Tool {
 	heaters = []
 	extruders = []
 	mix = []
-	spindle = -1
 	axes = []					// may hold sub-arrays of drives per axis
 	offsets = []				// offsets in the same order as the axes
 	offsetsProbed = 0			// bitmap of the probed axes
@@ -290,10 +283,6 @@ function fixItems(items, ClassType) {
 // TODO: Eventually this could be combined with the 'merge' function
 // But getting everything the way it's supposed to work took longer than expected anyway...
 export function fixMachineItems(state, mergeData) {
-	if (mergeData.cnc && mergeData.cnc.spindles) {
-		fixItems(state.cnc.spindles, Spindle);
-	}
-
 	if (mergeData.fans) {
 		fixItems(state.fans, Fan)
 	}
@@ -301,9 +290,6 @@ export function fixMachineItems(state, mergeData) {
 	if (mergeData.heat) {
 		if (mergeData.heat.beds) {
 			fixItems(state.heat.beds, BedOrChamber);
-		}
-		if (mergeData.heat.chambers) {
-			fixItems(state.heat.chambers, BedOrChamber);
 		}
 		if (mergeData.heat.extra) {
 			fixItems(state.heat.extra, ExtraHeater);

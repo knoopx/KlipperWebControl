@@ -582,8 +582,6 @@ export default {
 			caption: '列表项目',
 			toolTemperatures: '工具温度',
 			bedTemperatures: '床温度',
-			chamberTemperatures: '室温',
-			spindleRPM: '轴转速'
 		},
 		settingsMachine: {
 			caption: '机器特性',
@@ -646,7 +644,6 @@ export default {
 			active: '活动',
 			standby: '待机',
 			bed: '床{0}',
-			chamber: '室温{0}',
 			extra: {
 				caption: '额外',
 				sensor: '传感器',

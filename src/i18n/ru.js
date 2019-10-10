@@ -581,8 +581,6 @@
 			caption: 'Настройка пресетов',
 			toolTemperatures: 'Температура сопла',
 			bedTemperatures: 'Температура стола',
-			chamberTemperatures: 'Температура термокамеры',
-			spindleRPM: 'Частота вращения шпинделя'
 		},
 		settingsMachine: {
 			caption: 'Установки устройства',
@@ -645,7 +643,6 @@
 			active: 'Акт.',
 			standby: 'Ожидание',
 			bed: 'Стол {0}',
-			chamber: 'Термокамера {0}',
 			extra: {
 				caption: 'Доп.',
 				sensor: 'Сенсор',
