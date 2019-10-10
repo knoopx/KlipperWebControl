@@ -16,8 +16,6 @@
 			<code-btn v-if="!isPrinting && processAnotherCode" color="success" block :code="processAnotherCode">
 				<v-icon class="mr-1">refresh</v-icon> {{ processAnotherText }}
 			</code-btn>
-
-			<v-switch :label="$t('panel.jobControl.autoSleep')" v-model="autoSleepActive" :disabled="uiFrozen" hide-details></v-switch>
 		</v-card-text>
 	</v-card>
 </template>
@@ -25,18 +23,13 @@
 <script>
 'use strict'
 
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
 	computed: {
-		...mapState('machine', ['autoSleep']),
 		...mapState('machine/model', ['job', 'state']),
 		...mapGetters(['uiFrozen']),
 		...mapGetters('machine/model', ['isPaused', 'isPrinting']),
-		autoSleepActive: {
-			get() { return this.autoSleep; },
-			set(value) { this.setAutoSleep(value) }
-		},
 		pauseResumeText() {
 			if (this.state.mode === 'FFF') {
 				return this.$t(this.isPaused ? 'panel.jobControl.resumePrint' : 'panel.jobControl.pausePrint');
@@ -62,6 +55,5 @@ export default {
 			return this.$t('panel.jobControl.repeatJob');
 		}
 	},
-	methods: mapMutations('machine', ['setAutoSleep'])
 }
 </script>

@@ -503,7 +503,6 @@
 			resumePrint: 'Продолжить печать',
 			repeatJob: 'Запустить снова',
 			repeatPrint: 'Печатать снова',
-			autoSleep: 'Включить авто сон'
 		},
 		jobData: {
 			caption: 'Собранные данные',

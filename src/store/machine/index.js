@@ -39,7 +39,6 @@ export default function(hostname, connector) {
 	return {
 		namespaced: true,
 		state: {
-			autoSleep: false,
 			events: [],								// provides machine events in the form of { date, type, title, message }
 			isReconnecting: false
 		},
@@ -214,15 +213,6 @@ export default function(hostname, connector) {
 					if (wasPrinting && !getters.isPrinting) {
 						// Clear the cache of the last file
 						commit('cache/clearFileInfo', lastJobFile);
-
-						// Send M1 if auto-sleep is enabled
-						if (state.autoSleep) {
-							try {
-								await dispatch('sendCode', 'M1');
-							} catch (e) {
-								logCode('M1', e.message, hostname);
-							}
-						}
 					}
 				}
 			},
@@ -250,7 +240,6 @@ export default function(hostname, connector) {
 
 			unregister: () => connector.unregister(),
 
-			setAutoSleep: (state, value) => state.autoSleep = value,
 			setReconnecting: (state, reconnecting) => state.isReconnecting = reconnecting,
 			setHighVerbosity() { if (connector) { connector.verbose = true; } },
 			setNormalVerbosity() { if (connector) { connector.verbose = false; } }

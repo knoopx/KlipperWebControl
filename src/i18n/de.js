@@ -503,7 +503,6 @@ export default {
 			resumePrint: 'Druck wiederaufnehmennt',
 			repeatJob: 'Nochmal starten',
 			repeatPrint: 'Nochmal drucken',
-			autoSleep: 'Auto-Schlaf aktivieren'
 		},
 		jobData: {
 			caption: 'Gesammelte Daten',

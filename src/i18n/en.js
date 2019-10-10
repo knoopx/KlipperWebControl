@@ -503,7 +503,6 @@ export default {
 			resumePrint: 'Resume Print',
 			repeatJob: 'Start Again',
 			repeatPrint: 'Print Again',
-			autoSleep: 'Enable Auto-Sleep'
 		},
 		jobData: {
 			caption: 'Collected Data',

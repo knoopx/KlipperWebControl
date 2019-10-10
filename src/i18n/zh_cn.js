@@ -504,7 +504,6 @@ export default {
 			resumePrint: '恢复打印',
 			repeatJob: '重新开始',
 			repeatPrint: '重新打印',
-			autoSleep: '启用自动睡眠'
 		},
 		jobData: {
 			caption: '采集数据',

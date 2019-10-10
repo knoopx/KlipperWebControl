@@ -504,7 +504,6 @@ export default {
 			resumePrint: 'Reprendre Impression',
 			repeatJob: 'Recommencer',
 			repeatPrint: 'Réimprimer',
-			autoSleep: 'Activer Veille Automatique'
 		},
 		jobData: {
 			caption: 'Données Collectés',
