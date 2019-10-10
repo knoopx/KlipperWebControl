@@ -19,19 +19,6 @@
 	padding-right: 0px !important;
 }
 
-.global-control.theme--light {
-	background-color: #F5F5F5 !important;
-}
-#global-container .v-card.theme--light {
-	background-color: #F5F5F5 !important;
-}
-.global-control.theme--dark {
-	background-color: #515151 !important;
-}
-#global-container .v-card.theme--dark {
-	background-color: #515151 !important;
-}
-
 input[type='number'] {
     -moz-appearance: textfield;
 }

@@ -1,11 +1,5 @@
-<style scoped>
-span {
-	border-radius: 5px;
-}
-</style>
-
 <template>
-	<span class="px-2" :class="statusClass">{{ statusText }}</span>
+	<v-chip class="px-2" :class="statusClass">{{ statusText }}</v-chip>
 </template>
 
 <script>

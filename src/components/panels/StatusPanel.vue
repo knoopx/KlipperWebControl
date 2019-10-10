@@ -27,14 +27,8 @@ a:not(:hover) {
 <template>
 	<v-card>
 		<v-card-title class="py-2">
-			<v-icon small class="mr-1">info</v-icon> {{ $t('panel.status.caption') }}
-
-			<v-spacer></v-spacer>
-
 			<status-label v-if="this.state.status"></status-label>
-
 			<v-spacer></v-spacer>
-
 			<span v-if="state.mode">{{ $t('panel.status.mode', [state.mode]) }}</span>
 		</v-card-title>
 
