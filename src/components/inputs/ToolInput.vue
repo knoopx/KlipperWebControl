@@ -65,13 +65,13 @@ export default {
 							const currentTemps = this.tool['active'];
 							const value = this.value, heaterIndex = this.heaterIndex;
 							const newTemps = currentTemps.map((temp, i) => (i === heaterIndex) ? value : temp).reduce((a, b) => `${a}:${b}`);
-							await this.sendCode(`G10 P${this.tool.number} S${newTemps}`);
+							await this.sendCode(`M104 T${this.tool.number} S${newTemps}`);
 						} else if (this.bed) {
 							// Set bed temp
 							const currentTemps = this.bed['active'];
 							const value = this.value, heaterIndex = this.heaterIndex;
 							const newTemps = currentTemps.map((temp, i) => (i === heaterIndex) ? value : temp).reduce((a, b) => `${a}:${b}`);
-							await this.sendCode(`M140 P${this.bedIndex} S${newTemps}`);
+							await this.sendCode(`M140 S${newTemps}`);
 						} else if (this.all) {
 							// Set all temps
 							let code = '';
@@ -79,13 +79,13 @@ export default {
 							this.tools.forEach(function(tool) {
 								if (tool.heaters.length) {
 									const temps = tool.heaters.map(() => targetTemp).reduce((a, b) => a + ':' + b);
-									code += `G10 P${tool.number} S${temps}\n`;
+									code += `M104 T${tool.number} S${temps}\n`;
 								}
 							}, this);
-							this.heat.beds.forEach(function(bed, index) {
+							this.heat.beds.forEach(function(bed) {
 								if (bed && bed.heaters.length) {
 									const temps = bed.heaters.map(() => targetTemp).reduce((a, b) => a + ':' + b);
-									code += `M140 P${index} S${temps}\n`;
+									code += `M140 S${temps}\n`;
 								}
 							}, this);
 							await this.sendCode(code);

@@ -285,12 +285,12 @@ export default {
 			this.tools.forEach(function(tool) {
 				if (tool.heaters.length) {
 					const temps = tool.heaters.map(() => '-273.15').reduce((a, b) => a + ':' + b);
-					code += `G10 P${tool.number} R${temps} S${temps}\n`;
+					code += `M104 T${tool.number} S${temps}\n`;
 				}
 			});
-			this.heat.beds.forEach(function(bed, index) {
+			this.heat.beds.forEach(function(bed) {
 				if (bed && bed.heaters.length) {
-					code += `M140 P${index} S-273.15\n`;
+					code += `M140 S-273.15\n`;
 				}
 			});
 
@@ -371,29 +371,18 @@ export default {
 			}
 			this.waitingForCode = false;
 		},
-		toolHeaterClick(tool, heater) {
+		toolHeaterClick(tool, index) {
 			if (!this.isConnected) {
 				return;
 			}
+			const heater = this.heat.heaters[index]
 
-			let offTemps;
-			switch (this.heat.heaters[heater].state) {
-				case 0:		// Off -> Active
-					this.sendCode(`T${tool.number}`);
+			switch (heater.state) {
+				case 0:		// Off
 					break;
 
-				case 1:		// Standby -> Off
-					offTemps = tool.active.map(() => '-273.15').reduce((a, b) => `${a}:${b}`);
-					this.sendCode(`G10 P${tool.number} S${offTemps} R${offTemps}`);
-					break;
-
-				case 2:		// Active -> Standby
-					this.sendCode('T-1');
-					break;
-
-				case 3:		// Fault -> Ask for reset
-					this.faultyHeater = heater;
-					this.resetHeaterFault = true;
+				case 1:		// Active, turn it off
+					this.sendCode(`M104 T${index} S0`);
 					break;
 			}
 		},
@@ -411,23 +400,13 @@ export default {
 
 			let temps;
 			switch (this.heat.heaters[heater].state) {
-				case 0:		// Off -> Active
+				case 0:		// Off
 					temps = (bed.active instanceof Array) ? bed.active.reduce((a, b) => `${a}:${b}`) : bed.active;
-					this.sendCode(`M140 P${bedIndex} S${temps}`);
+					this.sendCode(`M140 S${temps}`);
 					break;
 
-				case 1:		// Standby -> Off
-					temps = (bed.active instanceof Array) ? bed.active.map(() => '-273.15').reduce((a, b) => `${a}:${b}`) : '-273.15';
-					this.sendCode(`M140 P${bedIndex} S${temps}`);
-					break;
-
-				case 2:		// Active -> Standby
-					this.sendCode(`M144 P${bedIndex}`);
-					break;
-
-				case 3:		// Fault -> Ask for reset
-					this.faultyHeater = heater;
-					this.resetHeaterFault = true;
+				case 1:		// On
+					this.sendCode(`M144 S-273.15`);
 					break;
 			}
 		},
