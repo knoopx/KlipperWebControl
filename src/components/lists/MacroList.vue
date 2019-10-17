@@ -116,7 +116,7 @@ export default {
 			} else if (!item.executing) {
 				item.executing = true;
 				try {
-					await this.sendCode(`M98 P"${filename}"`);
+					await this.sendCode(`RUN_MACRO FILE="${filename}"`);
 				} catch (e) {
 					if (!(e instanceof DisconnectedError)) {
 						console.warn(e);

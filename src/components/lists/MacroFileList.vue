@@ -16,7 +16,7 @@
 			</v-btn>
 			<upload-btn class="hidden-sm-and-down" :directory="directory" target="macros" color="primary"></upload-btn>
 		</v-toolbar>
-		
+
 		<base-file-list ref="filelist" v-model="selection" :directory.sync="directory" :loading.sync="loading" sort-table="macros" @fileClicked="fileClicked" no-files-text="list.macro.noMacros">
 			<template slot="context-menu">
 				<v-list-tile v-show="isFile" @click="runFile(selection[0].name)">
@@ -49,7 +49,7 @@
 
 import { mapGetters, mapActions } from 'vuex'
 
-import Path from '../../utils/path.js'
+import Path from '../../utils/path'
 
 export default {
 	computed: {
@@ -85,9 +85,8 @@ export default {
 			this.runMacroDialog.shown = true;
 		},
 		runFile(filename) {
-			this.sendCode(`M98 P"${Path.combine(this.directory, filename)}"`);
+			this.sendCode(`RUN_MACRO FILE="${Path.combine(this.directory, filename)}"`);
 		}
 	}
 }
 </script>
-
