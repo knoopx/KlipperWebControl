@@ -44,7 +44,7 @@ export default {
 		},
 		processAnotherCode() {
 			if (this.job.lastFileName) {
-				return `M32 "${this.job.lastFileName}"`;
+				return `PRINT_FILE FILE="${this.job.lastFileName}"`;
 			}
 			return undefined;
 		},

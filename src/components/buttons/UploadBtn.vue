@@ -42,8 +42,9 @@ export default {
 		},
 		accept() {
 			switch (this.target) {
-				case 'gcodes': return '.g,.gcode,.gc,.gco,.nc,.ngc,.tap';
-				case 'start': return '.g,.gcode,.gc,.gco,.nc,.ngc,.tap';
+				case 'start':
+				case 'gcodes':
+					return '.g,.gcode,.gc,.gco,.nc,.ngc,.tap';
 				case 'macros': return '*';
 				case 'filaments': return '.zip';
 				case 'display': return '*';
@@ -59,8 +60,9 @@ export default {
 			}
 
 			switch (this.target) {
-				case 'gcodes': return Path.gcodes;
-				case 'start': return Path.gcodes;
+				case 'start':
+				case 'gcodes':
+					return Path.gcodes;
 				case 'macros': return Path.macros;
 				case 'filaments': return Path.filaments;
 				case 'display': return Path.display;
@@ -222,7 +224,7 @@ export default {
 
 					// Run it (if required)
 					if (this.target === 'start') {
-						await this.sendCode(`M32 "${filename}"`);
+						await this.sendCode(`PRINT_FILE FILE="${filename}"`);
 					}
 				} catch (e) {
 					success = false;
