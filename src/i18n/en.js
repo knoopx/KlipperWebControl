@@ -252,11 +252,7 @@ export default {
 		success: 'Success',
 		heaterStates: [
 			'off',
-			'standby',
 			'active',
-			'fault',
-			'tuning',
-			'offline'
 		],
 		status: {
 			updating: 'Updating',

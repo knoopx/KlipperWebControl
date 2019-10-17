@@ -254,11 +254,7 @@ export default {
 		success: '成功',
 		heaterStates: [
 			'关闭',
-			'待机',
 			'活动',
-			'故障',
-			'正在调整？？？',
-			'offline'
 		],
 		status: {
 			updating: '正在更新',

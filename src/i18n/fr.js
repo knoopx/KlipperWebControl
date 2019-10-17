@@ -253,11 +253,7 @@ export default {
 		success: 'Succès',
 		heaterStates: [
 			'off',
-			'veille',
 			'actif',
-			'défaut',
-			'réglage',
-			'offline'
 		],
 		status: {
 			updating: 'Mise à Jour...',
