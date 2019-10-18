@@ -102,7 +102,6 @@ const pathObj = {
 	cacheFile: '0:/sys/kwc/cache.json',
 	factoryDefaults: '0:/sys/kwc/defaults.json',
 	settingsFile: '0:/sys/kwc/settings.json',
-	heightmap: '0:/sys/heightmap.csv',
 
 	combine,
 	extractFileName,

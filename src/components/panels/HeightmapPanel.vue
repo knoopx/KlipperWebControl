@@ -26,8 +26,6 @@ canvas {
 		<v-card class="card">
 			<v-container ref="container" class="pa-1" fluid>
 				<v-layout row wrap fill-height>
-					<!-- TODO: Add CSV list here -->
-
 					<v-flex class="heightmap-container pa-2" xs12 sm12 md9 lg10 xl10>
 						<v-layout ref="parentElement" row fill-height>
 							<v-flex class="loading" v-show="!ready">
@@ -52,12 +50,6 @@ canvas {
 								{{ $t('panel.heightmap.numPoints', [$display(numPoints, 0)]) }}
 							</v-flex>
 							<v-flex>
-								{{ $t('panel.heightmap.radius', [$display(radius, 0, 'mm')]) }}
-							</v-flex>
-							<v-flex>
-								{{ $t('panel.heightmap.area', [$display(area / 100, 1, 'cm²')]) }}
-							</v-flex>
-							<v-flex>
 								{{ $t('panel.heightmap.maxDeviations', [$display(minDiff, 3), $display(maxDiff, 3, 'mm')]) }}
 							</v-flex>
 							<v-flex>
@@ -67,10 +59,19 @@ canvas {
 								{{ $t('panel.heightmap.rmsError', [$display(rmsError, 3, 'mm')]) }}
 							</v-flex>
 							<v-flex shrink>
+								Display
+							</v-flex>
+							<v-flex>
+								<v-btn-toggle mandatory v-model="displayType">
+									<v-btn value="mesh">Mesh</v-btn>
+									<v-btn value="probed">Probed Points</v-btn>
+								</v-btn-toggle>
+							</v-flex>
+							<v-flex shrink>
 								{{ $t('panel.heightmap.colorScheme') }}
 							</v-flex>
 							<v-flex>
-								<v-btn-toggle v-model="colorScheme">
+								<v-btn-toggle mandatory v-model="colorScheme">
 									<v-btn value="terrain">{{ $t('panel.heightmap.terrain') }}</v-btn>
 									<v-btn value="heat">{{ $t('panel.heightmap.heat') }}</v-btn>
 								</v-btn-toggle>
@@ -104,14 +105,12 @@ canvas {
 <script>
 'use strict'
 
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 import { Scene, PerspectiveCamera, WebGLRenderer, Raycaster, Mesh, MeshBasicMaterial, Vector2, Vector3, VertexColors, DoubleSide, ArrowHelper, GridHelper } from 'three'
 import OrbitControls from 'three-orbitcontrols'
 
 import { drawLegend, setFaceColors, generateIndicators, generateMeshGeometry } from '../../utils/3d.js'
-import CSV from '../../utils/csv.js'
-import Path from '../../utils/path.js'
 
 const scaleZ = 0.5, maxVisualizationZ = 0.25
 const indicatorColor = 0xFFFFFF, indicatorOpacity = 0.4, indicatorOpacityHighlighted = 1.0
@@ -139,6 +138,7 @@ export default {
 	},
 	computed: {
 		...mapGetters(['isConnected']),
+		...mapGetters('machine', ['client']),
 		...mapState('settings', ['language'])
 	},
 	data() {
@@ -149,6 +149,7 @@ export default {
 			errorMessage: null,
 
 			colorScheme: 'terrain',
+			displayType: 'mesh',
 			tooltip: {
 				coord: {
 					x: 0,
@@ -160,18 +161,13 @@ export default {
 				shown: false
 			},
 			numPoints: undefined,			// points excluding NaN
-			area: undefined,
-			radius: undefined,
 			minDiff: undefined,
 			maxDiff: undefined,
 			meanError: undefined,
 			rmsError: undefined,
-
-			unsubscribe: undefined
 		}
 	},
 	methods: {
-		...mapActions('machine', ['download']),
 		init() {
 			// Perform initial resize
 			const size = this.resize();
@@ -217,31 +213,7 @@ export default {
 			drawLegend(this.$refs.legend, maxVisualizationZ, this.colorScheme);
 			return { width, height };
 		},
-		showCSV(csvData) {
-			// Load the CSV. The first line is a comment that can be removed
-			const csv = new CSV(csvData.substr(csvData.indexOf("\n") + 1));
-			let radius = parseFloat(csv.get('radius'));
-			if (radius <= 0) { radius = undefined; }
-			const xMin = parseFloat(csv.get('xmin'));
-			const yMin = parseFloat(csv.get('ymin'));
-			let xSpacing = parseFloat(csv.get('xspacing'));
-			if (isNaN(xSpacing)) { xSpacing = parseFloat(csv.get('spacing')); }
-			let ySpacing = parseFloat(csv.get('yspacing'));
-			if (isNaN(ySpacing)) { ySpacing = parseFloat(csv.get('spacing')); }
-
-			// Convert each point to a vector
-			const points = [];
-			for (let y = 1; y < csv.content.length; y++) {
-				for (let x = 0; x < csv.content[y].length; x++) {
-					const value = csv.content[y][x].trim();
-					points.push([xMin + x * xSpacing, yMin + (y - 1) * ySpacing, (value === "0") ? NaN : parseFloat(value)]);
-				}
-			}
-
-			// Display height map
-			this.showHeightmap(points, radius);
-		},
-		showHeightmap(points, probeRadius) {
+		showHeightmap(points) {
 			// Clean up first
 			if (this.three.meshGeometry) {
 				this.three.scene.remove(this.three.meshPlane);
@@ -258,7 +230,6 @@ export default {
 			// Generate stats
 			let xMin, xMax, yMin, yMax;
 
-			this.radius = probeRadius;
 			this.numPoints = 0;
 			this.minDiff = undefined;
 			this.maxDiff = undefined;
@@ -283,7 +254,6 @@ export default {
 				}
 			}
 
-			this.area = probeRadius ? (probeRadius * probeRadius * Math.PI) : Math.abs((xMax - xMin) * (yMax - yMin));
 			this.rmsError = Math.sqrt(((this.rmsError * this.numPoints) - (this.meanError * this.meanError))) / this.numPoints;
 			this.meanError = this.meanError / this.numPoints;
 
@@ -375,7 +345,7 @@ export default {
 			this.three.camera.updateProjectionMatrix();
 		},
 
-		async getHeightmap(filename = Path.heightmap) {
+		async getHeightmap() {
 			if (this.loading) {
 				// Don't attempt to load more than one file at once...
 				return;
@@ -384,36 +354,14 @@ export default {
 			this.ready = false;
 			this.loading = true;
 			try {
-				const heightmap = await this.download({ filename, type: 'text', showSuccess: false, showError: false });
-				this.showCSV(heightmap);
+				const {data} = await this.client.get('machine/bed_mesh/height_map');
+				this.data = data
+				this.showHeightmap(this.data[this.displayType])
 			} catch (e) {
-				console.warn(e);
 				this.errorMessage = e.message;
 			}
 			this.loading = false;
 		},
-
-		testMesh() {
-			const csvData = 'RepRapFirmware height map file v1\nxmin,xmax,ymin,ymax,radius,spacing,xnum,ynum\n-140.00,140.10,-140.00,140.10,150.00,20.00,15,15\n0,0,0,0,0,-0.139,-0.188,-0.139,-0.202,-0.224,0,0,0,0,0\n0,0,0,-0.058,-0.066,-0.109,-0.141,-0.129,-0.186,-0.198,-0.191,-0.176,0,0,0\n0,0,0.013,-0.008,-0.053,-0.071,-0.087,-0.113,-0.162,-0.190,-0.199,-0.267,-0.237,0,0\n0,0.124,0.076,0.025,-0.026,-0.054,-0.078,-0.137,-0.127,-0.165,-0.201,-0.189,-0.227,-0.226,0\n0,0.198,0.120,0.047,0.089,-0.074,-0.097,-0.153,-0.188,-0.477,-0.190,-0.199,-0.237,-0.211,0\n0.312,0.229,0.198,0.098,0.097,0.004,-0.089,-0.516,-0.150,-0.209,-0.197,-0.183,-0.216,-0.296,-0.250\n0.287,0.263,0.292,0.100,0.190,0.015,-0.102,-0.039,-0.125,-0.149,-0.137,-0.198,-0.188,-0.220,-0.192\n0.378,0.289,0.328,0.172,0.133,0.078,-0.086,0.134,-0.100,-0.150,-0.176,-0.234,-0.187,-0.199,-0.221\n0.360,0.291,0.260,0.185,0.111,0.108,0.024,0.073,-0.024,-0.116,-0.187,-0.252,-0.201,-0.215,-0.187\n0.447,0.397,0.336,0.276,0.180,0.164,0.073,-0.050,-0.049,-0.109,-0.151,-0.172,-0.211,-0.175,-0.161\n0,0.337,0.289,0.227,0.179,0.127,0.086,0.034,-0.039,-0.060,-0.113,-0.108,-0.171,-0.153,0\n0,0.478,0.397,0.374,0.270,0.141,0.085,0.074,0.037,-0.048,-0.080,-0.187,-0.126,-0.175,0\n0,0,0.373,0.364,0.265,0.161,0.139,0.212,0.040,0.046,-0.008,-0.149,-0.115,0,0\n0,0,0,0.346,0.295,0.273,0.148,0.136,0.084,0.024,-0.055,-0.078,0,0,0\n0,0,0,0,0,0.240,0.178,0.084,0.090,0.004,0,0,0,0,0';
-			this.showCSV(csvData);
-		},
-		testBedCompensation(numPoints) {
-			let testPoints;
-			switch (numPoints) {
-				case 3:
-					testPoints = [[15.0, 15.0, 0.123], [15.0, 195.0, -0.243], [215.0, 105.0, 0.034]];
-					break;
-				case 4:
-					testPoints = [[15.0, 15.0, 0.015], [15.0, 185.0, -0.193], [175.0, 185.0, 0.156], [175.0, 15.0, 0.105]];
-					break;
-				case 5:
-					testPoints = [[15.0, 15.0, 0.007], [15.0, 185.0, -0.121], [175.0, 185.0, -0.019], [175.0, 15.0, 0.193], [95.0, 100.0, 0.05]];
-					break;
-				default:
-					throw new Error("Bad number of probe points, only one of 3/4/5 is supported");
-			}
-			this.showHeightmap(testPoints);
-		}
 	},
 	activated() {
 		this.isActive = true;
@@ -423,19 +371,10 @@ export default {
 		this.isActive = false;
 	},
 	mounted() {
-		const getHeightmap = this.getHeightmap;
-		this.unsubscribe = this.$store.subscribeAction(function(action) {
-			if (action.type.endsWith('onCodeCompleted') && action.payload.reply.indexOf('heightmap.csv') !== -1) {
-				getHeightmap();
-			}
-		});
-
 		// FIXME give the grid some time to resize everything...
 		setTimeout(this.init, 100);
 	},
 	beforeDestroy() {
-		this.unsubscribe();
-
 		threeInstances = threeInstances.filter(item => item !== this);
 		if (this.three.renderer) {
 			this.three.renderer.forceContextLoss();
@@ -443,6 +382,11 @@ export default {
 		}
 	},
 	watch: {
+		displayType(value){
+			if (this.data) {
+				this.showHeightmap(this.data[value])
+			}
+		},
 		colorScheme(to) {
 			if (this.three.meshGeometry) {
 				setFaceColors(this.three.meshGeometry, scaleZ, to, maxVisualizationZ);
