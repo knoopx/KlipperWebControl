@@ -26,10 +26,10 @@ export function logCode(code = '', response, hostname = store.state.selectedMach
 	let type = 'success', toLog = response;
 	if (response.startsWith(ERROR_PREFIX)) {
 		type = 'error';
-		toLog = response.substr(ERROR_PREFIX.length);
+		toLog = response.replace(/\B!! /g, '');
 	} else if (response.startsWith(INFO_PREFIX)) {
 		type = 'info';
-		toLog = response.substr(INFO_PREFIX.length);
+		toLog = response.replace(/\B\/\/ /g, '');
 	}
 
 	// Log it
