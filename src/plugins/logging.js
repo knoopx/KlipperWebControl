@@ -23,15 +23,13 @@ export function logCode(code = '', response, hostname = store.state.selectedMach
 	const INFO_PREFIX = '// '
 
 	// Determine type
-	let type = 'warning', toLog = response;
+	let type = 'success', toLog = response;
 	if (response.startsWith(ERROR_PREFIX)) {
 		type = 'error';
 		toLog = response.substr(ERROR_PREFIX.length);
 	} else if (response.startsWith(INFO_PREFIX)) {
 		type = 'info';
 		toLog = response.substr(INFO_PREFIX.length);
-	} else if (response === '') {
-		type = 'success';
 	}
 
 	// Log it
