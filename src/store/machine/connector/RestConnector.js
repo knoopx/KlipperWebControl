@@ -165,7 +165,7 @@ export default class RestConnector extends BaseConnector {
 		// Deal with generic messages
 		if (this.model.messages !== undefined) {
 			this.model.messages.forEach(async function(message) {
-				await that.dispatch('onCodeCompleted', { code: undefined, reply: message.content });
+				await that.dispatch('onCodeCompleted', { code: undefined, reply: message });
 			});
 			delete this.model.messages;
 		}
@@ -209,21 +209,7 @@ export default class RestConnector extends BaseConnector {
 			// Deal with generic messages
 			if (data.messages) {
 				data.messages.forEach(async function(message) {
-					let reply;
-					switch (message.type) {
-						case 1:
-							reply  = `Warning: ${message.content}`;
-							break;
-						case 2:
-							reply  = `Error: ${message.content}`;
-							break;
-						default:
-							reply = message.content;
-							break;
-					}
-
-					// TODO Pass supplied date/time here
-					await that.dispatch('onCodeCompleted', { code: undefined, reply });
+					await that.dispatch('onCodeCompleted', { code: undefined, message });
 				});
 				delete data.messages;
 			}
@@ -331,7 +317,7 @@ export default class RestConnector extends BaseConnector {
 		formData.set('from', from);
 		formData.set('to', to);
 		formData.set('force', !!force);
-		
+
 		try {
 			await this.axios.post('machine/file/move', formData, {
 				filename: from
