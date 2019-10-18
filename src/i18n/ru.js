@@ -210,7 +210,6 @@
 		directoryNotFound: 'Папка {0} не найдена',
 		fileNotFound: 'Файл {0} не найден',
 		invalidHeightmap: 'Неверная карта высот',
-		operationFailed: 'Операция не выполнена (Причина: {0})',
 		uploadStartWrongFileCount: 'Только один файл может быть загружен и запущен',
 		uploadNoSingleZIP: 'Только один ZIP архив может быть загружен',
 		uploadNoFiles: 'Этот ZIP архив не содержит используемых файлов',

@@ -212,7 +212,6 @@ export default {
 		directoryNotFound: '目录{0}不存在',
 		fileNotFound: '文件{0}不存在',
 		invalidHeightmap: '无效高度图',
-		operationFailed: '操作失败（原因：{0}）',
 		uploadStartWrongFileCount: '只能上传和启动单个文件',
 		uploadNoSingleZIP: '一次只能上传一个ZIP文件',
 		uploadNoFiles: '此ZIP不包含任何可用文件',

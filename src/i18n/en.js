@@ -210,7 +210,6 @@ export default {
 		directoryNotFound: 'Directory {0} not found',
 		fileNotFound: 'File {0} not found',
 		invalidHeightmap: 'Invalid Height Map',
-		operationFailed: 'Operation failed (Reason: {0})',
 		uploadStartWrongFileCount: 'Only a single file can be uploaded & started',
 		uploadNoSingleZIP: 'Only a single ZIP file can be uploaded at once',
 		uploadNoFiles: 'This ZIP does not contain any usable fiels',

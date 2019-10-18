@@ -211,7 +211,6 @@ export default {
 		directoryNotFound: 'Répertoire {0} introuvable',
 		fileNotFound: 'Fichier {0} introuvable',
 		invalidHeightmap: 'Carte de Hauteur Invalide',
-		operationFailed: 'Échec de l\'opération (Raison: {0})',
 		uploadStartWrongFileCount: 'Seulement un fichier peut être envoyer & démarrer',
 		uploadNoSingleZIP: 'Seulement un fichier ZIP peut être envoyé à la fois',
 		uploadNoFiles: 'Ce ZIP ne contient aucun fichier utilisable',
