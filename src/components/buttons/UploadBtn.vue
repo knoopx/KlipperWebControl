@@ -27,9 +27,7 @@ const webExtensions = ['.htm', '.html', '.ico', '.xml', '.css', '.map', '.js', '
 export default {
 	computed: {
 		...mapState(['isLocal']),
-		...mapState('machine/model', ['electronics']),
 		...mapGetters(['isConnected', 'uiFrozen']),
-		...mapGetters('machine/model', ['board']),
 		caption() {
 			if (this.extracting) {
 				return this.$t('generic.extracting');

@@ -136,46 +136,6 @@ a:not(:hover) {
 
 						<v-flex>
 							<v-layout row wrap>
-								<v-flex v-if="electronics.vIn.current !== null">
-									<v-layout column>
-										<v-flex tag="strong">
-											{{ $t('panel.status.vIn') }}
-										</v-flex>
-
-										<v-tooltip bottom>
-											<template slot="activator">
-												<v-flex tag="span">
-													{{ $display(electronics.vIn.current, 1, 'V') }}
-												</v-flex>
-											</template>
-
-											<span>
-												{{ $t('panel.status.vInTitle', [$display(electronics.vIn.min, 1, 'V'), $display(electronics.vIn.max, 1, 'V')]) }}
-											</span>
-										</v-tooltip>
-									</v-layout>
-								</v-flex>
-
-								<v-flex v-if="electronics.mcuTemp.current !== null">
-									<v-layout column>
-										<v-flex tag="strong">
-											{{ $t('panel.status.mcuTemp') }}
-										</v-flex>
-
-										<v-tooltip bottom>
-											<template slot="activator">
-												<v-flex tag="span">
-													{{ $display(electronics.mcuTemp.current, 1, 'C') }}
-												</v-flex>
-											</template>
-
-											<span>
-												{{ $t('panel.status.mcuTempTitle', [$display(electronics.mcuTemp.min, 1, 'C'), $display(electronics.mcuTemp.max, 1, 'C')]) }}
-											</span>
-										</v-tooltip>
-									</v-layout>
-								</v-flex>
-
 								<v-flex v-show="fanRPM.length">
 									<v-layout column>
 										<v-flex tag="strong">
@@ -224,7 +184,7 @@ import { mapState, mapGetters } from 'vuex'
 export default {
 	computed: {
 		...mapState('settings', ['darkTheme']),
-		...mapState('machine/model', ['electronics', 'fans', 'move', 'sensors', 'state']),
+		...mapState('machine/model', ['fans', 'move', 'sensors', 'state']),
 		...mapGetters(['isConnected']),
 		...mapGetters('machine/model', ['isPrinting']),
 		fanRPM() {
@@ -233,7 +193,7 @@ export default {
 			return rpms;
 		},
 		sensorsPresent() {
-			return (this.electronics.vIn.current !== null) || (this.electronics.mcuTemp.current !== null) || this.fanRPM.length || (this.sensors.probes.length);
+			return this.fanRPM.length || this.sensors.probes.length;
 		}
 	},
 	data() {

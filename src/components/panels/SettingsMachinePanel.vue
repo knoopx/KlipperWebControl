@@ -2,10 +2,6 @@
 	<v-card>
 		<v-card-title>
 			<span>{{ $t('panel.settingsMachine.caption') }}</span>
-			<v-spacer></v-spacer>
-			<a v-if="!isLocal && electronics.type !== 'duet3'" href="/reprap.htm">
-				<v-icon small class="mr-1">fast_rewind</v-icon> {{ $t('panel.settingsMachine.revertDWC') }}
-			</a>
 		</v-card-title>
 
 		<v-container fluid grid-list-lg class="px-3">
@@ -29,7 +25,6 @@ import { mapState, mapMutations } from 'vuex'
 export default {
 	computed: {
 		...mapState('machine', ['settings']),
-		...mapState('machine/model', ['electronics']),
 		...mapState(['isLocal']),
 		babystepAmount: {
 			get() { return this.settings.babystepAmount; },

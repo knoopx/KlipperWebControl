@@ -170,7 +170,7 @@ export default function(hostname, connector) {
 			},
 
 			// Update machine mode. Reserved for the machine connector!
-			async update({ state, getters, commit, dispatch }, payload) {
+			async update({ state, getters, commit }, payload) {
 				const wasPrinting = getters.isPrinting, lastJobFile = state.model.job.file.fileName;
 				const beepFrequency = state.model.state.beep.frequency, beepDuration = state.model.state.beep.duration;
 				const displayMessage = state.model.state.displayMessage;
@@ -178,7 +178,7 @@ export default function(hostname, connector) {
 				// Merge updates into the object model
 				//console.log(JSON.stringify(payload));
 				commit('model/update', payload);
-				
+
 				// Is a beep requested?
 				if (state.model.state.beep.frequency != 0 && state.model.state.beep.duration != 0 &&
 					(state.model.state.beep.frequency != beepFrequency || state.model.state.beep.duration != beepDuration))
@@ -192,8 +192,7 @@ export default function(hostname, connector) {
 				}
 
 				// Is an update or emergency reset in progress?
-				const reconnect = (state.model.state.status === 'updating') ||
-					(!state.model.electronics.type.startsWith('duet3') && state.model.state.status === 'halted');
+				const reconnect = ['updating', 'halted'].includes(state.model.state.status)
 				if (reconnect) {
 					if (!state.isReconnecting) {
 						if (state.model.state.status === 'halted') {
@@ -208,7 +207,7 @@ export default function(hostname, connector) {
 						log('success', i18n.t('events.reconnected'));
 						commit('setReconnecting', false);
 					}
-					
+
 					// Have we just finished a job?
 					if (wasPrinting && !getters.isPrinting) {
 						// Clear the cache of the last file

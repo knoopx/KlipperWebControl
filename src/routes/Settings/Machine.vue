@@ -3,9 +3,6 @@
 		<v-flex md6 lg4>
 			<v-layout row wrap>
 				<v-flex sm6 md12>
-					<settings-electronics-panel></settings-electronics-panel>
-				</v-flex>
-				<v-flex sm6 md12>
 					<settings-machine-panel></settings-machine-panel>
 				</v-flex>
 				<v-flex>

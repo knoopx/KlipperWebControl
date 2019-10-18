@@ -294,10 +294,6 @@ export function fixMachineItems(state, mergeData) {
 		fixItems(state.cnc.spindles, Spindle);
 	}
 
-	if (mergeData.electronics && mergeData.electronics.expansionBoards) {
-		fixItems(state.electronics.expansionBoards, ExpansionBoard);
-	}
-
 	if (mergeData.fans) {
 		fixItems(state.fans, Fan)
 	}

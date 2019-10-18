@@ -160,7 +160,7 @@ export default {
 			webcam: state => state.settings.webcam
 		}),
 		...mapGetters('machine', ['hasTemperaturesToDisplay']),
-		...mapGetters('machine/model', ['board', 'isPrinting', 'jobProgress']),
+		...mapGetters('machine/model', ['isPrinting', 'jobProgress']),
 		toggleGlobalContainerColor() {
 			if (this.hideGlobalContainer) {
 				return this.darkTheme ? 'red darken-5' : 'red lighten-4';
@@ -183,9 +183,6 @@ export default {
 		checkMenuCondition(condition) {
 			if (condition === 'webcam') {
 				return (this.webcam.url !== '');
-			}
-			if (condition === 'display') {
-				return this.board.hasDisplay;
 			}
 			return true;
 		},

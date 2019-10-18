@@ -336,21 +336,6 @@ export default class PollConnector extends BaseConnector {
 			this.probeType = response.data.probe ? response.data.probe.type : 0;
 
 			quickPatch(newData, {
-				electronics: {
-					firmware: {
-						name: response.data.firmwareName
-					},
-					mcuTemp: response.data.mcutemp ? {
-						min: response.data.mcutemp.min,
-						current: response.data.mcutemp.cur,
-						max: response.data.mcutemp.max
-					} : {},
-					vIn: response.data.vin ? {
-						min: response.data.vin.min,
-						current: response.data.vin.cur,
-						max: response.data.vin.max
-					} : {}
-				},
 				fans: newData.fans.map((fanData, index) => ({
 					name: !response.data.params.fanNames ? null : response.data.params.fanNames[index],
 					thermostatic: {
@@ -588,9 +573,6 @@ export default class PollConnector extends BaseConnector {
 		// See if we need to pass some info from the connect response
 		if (this.justConnected) {
 			quickPatch(newData, {
-				electronics: {
-					type: this.boardType
-				},
 				network: {
 					password: this.password
 				}
@@ -692,14 +674,6 @@ export default class PollConnector extends BaseConnector {
 	async getConfigResponse() {
 		const response = await this.axios.get('rr_config');
 		const configData = {
-			electronics: {
-				name: response.data.firmwareElectronics,
-				firmware: {
-					name: response.data.firmwareName,
-					version: response.data.firmwareVersion,
-					date: response.data.firmwareDate
-				}
-			},
 			move: {
 				axes: response.data.axisMins.map((min, index) => ({
 					min,

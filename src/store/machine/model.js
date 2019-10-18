@@ -1,6 +1,5 @@
 'use strict'
 
-import { defaultBoardName, getBoardDefinition } from './boards.js'
 import {
 	Axis,
 	Channel,
@@ -9,7 +8,6 @@ import {
 	ExtraHeater,
 	Extruder,
 	FileInfo,
-	Firmware,
 	Heater,
 	Probe,
 	Tool,
@@ -33,26 +31,6 @@ export default function(connector) {
 				lcd: new Channel(),
 				spi: new Channel(),
 				autoPause: new Channel()
-			},
-			electronics: {
-				version: null,
-				type: defaultBoardName,
-				shortName: null,
-				name: null,
-				revision: null,
-				firmware: new Firmware(),
-				processorID: null,
-				vIn: {
-					current: null,
-					min: null,
-					max: null
-				},
-				mcuTemp: {
-					current: null,
-					min: null,
-					max: null
-				},
-				expansionBoards: []
 			},
 			fans: [],
 			heat: {
@@ -213,7 +191,6 @@ export default function(connector) {
 			userVariables: []
 		},
 		getters: {
-			board: state => getBoardDefinition(state.electronics.type),
 			currentTool(state) {
 				if (state.state.currentTool >= 0) {
 					return state.tools[state.state.currentTool];
