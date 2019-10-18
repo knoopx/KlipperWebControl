@@ -47,7 +47,6 @@ export default {
 					return '.g,.gcode,.gc,.gco,.nc,.ngc,.tap';
 				case 'macros': return '*';
 				case 'filaments': return '.zip';
-				case 'display': return '*';
 				case 'sys': return '.zip,.bin,.json,.g,.csv';
 				case 'www': return '.zip,.csv,.json,.htm,.html,.ico,.xml,.css,.map,.js,.ttf,.eot,.svg,.woff,.woff2,.jpeg,.jpg,.png,.gz';
 				case 'update': return '.zip,.bin';
@@ -65,7 +64,6 @@ export default {
 					return Path.gcodes;
 				case 'macros': return Path.macros;
 				case 'filaments': return Path.filaments;
-				case 'display': return Path.display;
 				case 'sys': return Path.sys;
 				case 'www': return Path.www;
 				case 'update': return Path.sys;

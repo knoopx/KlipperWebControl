@@ -63,10 +63,6 @@ export default {
 				caption: 'Upload Filament Configs',
 				title: 'Upload one or more filament configurations (drag&drop is supported as well)'
 			},
-			display: {
-				caption: 'Upload Menu Files',
-				title: 'Upload one or more menu files (drag&drop is supported as well)'
-			},
 			sys: {
 				caption: 'Upload System Files',
 				title: 'Upload one or more system files (drag&drop is supported as well)'
@@ -194,7 +190,6 @@ export default {
 		numberRequired: 'Please enter a valid number'
 	},
 	directory: {
-		display: 'Menu Directory',
 		filaments: 'Filaments Directory',
 		gcodes: 'G-Codes Directory',
 		macros: 'Macros Directory',
@@ -309,9 +304,6 @@ export default {
 			driveUnmounted: 'Drive is unmounted',
 			goUp: 'Go up'
 		},
-		display: {
-			noFiles: 'No Display Files'
-		},
 		eventLog: {
 			date: 'Date',
 			type: 'Type',
@@ -361,7 +353,6 @@ export default {
 			jobs: 'Jobs',
 			filaments: 'Filaments',
 			macros: 'Macros',
-			display: 'Display',
 			system: 'System',
 			web: 'Web'
 		},

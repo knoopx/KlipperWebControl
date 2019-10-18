@@ -65,10 +65,6 @@ export default {
 				caption: '上传细丝配置',
 				title: '上传一个或多个细丝配置（也支持拖放）'
 			},
-			display: {
-				caption: '上传菜单文件',
-				title: '上传一个或多个菜单文件（也支持拖放）'
-			},
 			sys: {
 				caption: '上传系统文件',
 				title: '上传一个或多个系统文件（也支持拖放）'
@@ -196,7 +192,6 @@ export default {
 		numberRequired: '请输入有效的数值'
 	},
 	directory: {
-		display: '菜单目录',
 		filaments: '细丝目录',
 		gcodes: 'G-Codes目录',
 		macros: '宏目录',
@@ -310,9 +305,6 @@ export default {
 			noFiles: '没有文件或者目录',
 			goUp: '转到顶部'
 		},
-		display: {
-			noFiles: '没有文件可显示'
-		},
 		eventLog: {
 			date: '日期',
 			type: '类型',
@@ -362,7 +354,6 @@ export default {
 			jobs: '任务',
 			filaments: '细丝',
 			macros: '宏',
-			display: '显示',
 			system: '系统',
 			web: 'Web'
 		},

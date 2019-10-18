@@ -63,10 +63,6 @@ export default {
 				caption: 'Filamentkonfiguration Hochladen',
                 title: 'Eine oder mehr Filamentkonfigurationen hochladen (Drag&Drop wird ebenfalls unterstützt)'
 			},
-			display: {
-				caption: 'Menüdatei(en) hochladen',
-				title: 'Eine oder mehr Menüdateien hochladen (Drag&Drop wird ebenfalls unterstützt)'
-			},
 			sys: {
 				caption: 'Systemdatei(en) hochladen',
                 title: 'Eine oder mehr Systemdateien hochladen (Drag&Drop wird ebenfalls unterstützt)'
@@ -194,7 +190,6 @@ export default {
 		numberRequired: 'Bitte gültige Zahl eingeben'
 	},
 	directory: {
-		display: 'Menüverzeichnis',
 		filaments: 'Filamentverzeichnis',
 		gcodes: 'G-Code-Verzeichnis',
 		macros: 'Makroverzeichnis',
@@ -309,9 +304,6 @@ export default {
 			driveUnmounted: 'Laufwerk ist nicht eingebunden',
 			goUp: 'Nach oben'
 		},
-		display: {
-			noFiles: 'Keine Displaydateien'
-		},
 		eventLog: {
 			date: 'Datum',
 			type: 'Typ',
@@ -361,7 +353,6 @@ export default {
 			jobs: 'Aufträge',
 			filaments: 'Filamente',
 			macros: 'Makros',
-			display: 'Display',
 			system: 'System',
 			web: 'Web'
 		},

@@ -64,10 +64,6 @@ export default {
 				caption: 'Envoyer Configs Filament',
 				title: 'Envoyer une ou plusieures configuration de filament (le glisser/déposer est supporté)'
 			},
-			display: {
-				caption: 'Envoyer Fichiers Menu',
-				title: 'Envoyer un ou plusieurs fichiers menu (le glisser/déposer est supporté)'
-			},
 			sys: {
 				caption: 'Envoyer Fichiers Système',
 				title: 'Envoyer un ou plusieurs fichiers système (le glisser/déposer est supporté)'
@@ -195,7 +191,6 @@ export default {
 		numberRequired: 'Merci d\'entrer un nombre valide'
 	},
 	directory: {
-		display: 'Répertoire Menu',
 		filaments: 'Répertoire Filaments',
 		gcodes: 'Répertoire G-Codes',
 		macros: 'Répertoire Macros',
@@ -310,9 +305,6 @@ export default {
 			driveUnmounted: 'Le variateur n\'est pas monté',
 			goUp: 'Remonter'
 		},
-		display: {
-			noFiles: 'Aucun Fichier d\'Affichage'
-		},
 		eventLog: {
 			date: 'Date',
 			type: 'Type',
@@ -362,7 +354,6 @@ export default {
 			jobs: 'Travails',
 			filaments: 'Filaments',
 			macros: 'Macros',
-			display: 'Affichage',
 			system: 'Système',
 			web: 'Web'
 		},

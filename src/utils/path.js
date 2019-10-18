@@ -44,8 +44,7 @@ export function extractFilePath(path) {
 
 export function isSdPath(path) {
 	path = combine('0:', path);
-	return (path.startsWith(pathObj.display) ||
-			path.startsWith(pathObj.gcodes) ||
+	return (path.startsWith(pathObj.gcodes) ||
 			path.startsWith(pathObj.macros) ||
 			path.startsWith(pathObj.sys) ||
 			path.startsWith(pathObj.www));
@@ -93,7 +92,6 @@ export function stripMacroFilename(filename) {
 }
 
 const pathObj = {
-	display: '0:/menu',
 	gcodes: '0:/gcodes',
 	macros: '0:/macros',
 	filaments: '0:/filaments',

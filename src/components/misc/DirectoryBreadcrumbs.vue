@@ -39,10 +39,6 @@ export default {
 					pathItems.shift();
 					pathItems[0] = Path.filaments;
 					rootCaption = this.$t('directory.filaments');
-				} else if (this.value.startsWith(Path.display)) {
-					pathItems.shift();
-					pathItems[0] = Path.display;
-					rootCaption = this.$t('directory.display');
 				} else if (this.value.startsWith(Path.sys)) {
 					pathItems.shift();
 					pathItems[0] = Path.sys;

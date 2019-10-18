@@ -84,9 +84,6 @@ export default {
 			const matches = /\.(.*)$/.exec(this.filename.toLowerCase());
 			return matches && ['.g', '.gcode', '.gc', '.gco', '.nc', '.ngc', '.tap'].indexOf(matches[1]);
 		},
-		showDisplayHelp() {
-			return this.filename.startsWith(Path.display);
-		}
 	},
 	data() {
 		return {

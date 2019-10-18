@@ -11,10 +11,6 @@ export default function(hostname) {
 		state: {
 			fileInfos: {},
 			sorting: {
-				display: {
-					column: 'name',
-					descending: false
-				},
 				events: {
 					column: 'date',
 					descending: true
