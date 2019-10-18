@@ -8,6 +8,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "report": "vue-cli-service build --report",
+    "bump:patch": "yarn version --patch",
+    "bump:minor": "yarn version --minor",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
