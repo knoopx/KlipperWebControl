@@ -9,7 +9,6 @@
 		</v-btn>
 
 		<input ref="fileInput" type="file" :accept="accept" hidden @change="fileSelected" multiple>
-		<confirm-dialog :shown.sync="confirmUpdate" :question="$t('dialog.update.title')" :prompt="$t('dialog.update.prompt')" @confirmed="startUpdate"></confirm-dialog>
 	</div>
 </template>
 
@@ -49,7 +48,6 @@ export default {
 				case 'filaments': return '.zip';
 				case 'sys': return '.zip,.bin,.json,.g,.csv';
 				case 'www': return '.zip,.csv,.json,.htm,.html,.ico,.xml,.css,.map,.js,.ttf,.eot,.svg,.woff,.woff2,.jpeg,.jpg,.png,.gz';
-				case 'update': return '.zip,.bin';
 			}
 			return undefined;
 		},
@@ -66,7 +64,6 @@ export default {
 				case 'filaments': return Path.filaments;
 				case 'sys': return Path.sys;
 				case 'www': return Path.www;
-				case 'update': return Path.sys;
 			}
 			return undefined;
 		},
@@ -79,14 +76,8 @@ export default {
 			innerColor: this.color,
 			extracting: false,
 			uploading: false,
-
-			confirmUpdate: false,
 			updates: {
 				webInterface: false,
-				firmware: false,
-				wifiServer: false,
-				wifiServerSpiffs: false,
-
 				codeSent: false
 			}
 		}
@@ -139,7 +130,7 @@ export default {
 				}
 
 				if (files[0].name.toLowerCase().endsWith('.zip')) {
-					const zip = new JSZip(), zipFiles = [], target = this.target;
+					const zip = new JSZip(), zipFiles = [];
 					this.extracting = true;
 					try {
 						// Open the ZIP file and read its content
@@ -173,11 +164,6 @@ export default {
 				}
 			}
 
-			this.updates.webInterface = false;
-			this.updates.firmware = false;
-			this.updates.wifiServer = false;
-			this.updates.wifiServerSpiffs = false;
-
 			let success = true;
 			this.uploading = true;
 			for (let i = 0; i < files.length; i++) {
@@ -190,28 +176,9 @@ export default {
 						filename = Path.combine('0:/', content.name);
 					} else if (this.isWebFile(content.name)) {
 						filename = Path.combine(Path.www, content.name);
-						this.updates.webInterface |= /index.html(\.gz)?/i.test(content.name);
-					} else if (!this.board.firmwareFileRegEx) {
-						if (this.electronics.shortName &&
-							content.name.toLowerCase().startsWith('duet3firmware_' + this.electronics.shortName.toLowerCase()) &&
-							content.name.toLowerCase().endsWith('.bin')) {
-							filename = Path.combine(Path.sys, `Duet3Firmware_${this.electronics.shortName}.bin`);
-							this.updates.firmware = true;
-						}
-					} else if (this.board.firmwareFileRegEx.test(content.name)) {
-						filename = Path.combine(Path.sys, this.board.firmwareFile);
-						this.updates.firmware = true;
-					} else if (this.board.hasWiFi) {
-						if ((/DuetWiFiSocketServer(.*)\.bin/i.test(content.name) || /DuetWiFiServer(.*)\.bin/i.test(content.name))) {
-							filename = Path.combine(Path.sys, 'DuetWiFiServer.bin');
-							this.updates.wifiServer = true;
-						} else if (/DuetWebControl(.*)\.bin/i.test(content.name)) {
-							filename = Path.combine(Path.sys, 'DuetWebControl.bin');
-							this.updates.wifiServerSpiffs = true;
-						}
+						this.updates.webInterface |= /index.html/i.test(content.name);
 					}
 				}
-
 				try {
 					// Start uploading
 					if (files.length > 1) {
@@ -238,34 +205,6 @@ export default {
 					this.$makeNotification('success', this.$t('notification.upload.success', [zipName, this.$displayTime(secondsPassed)]));
 				}
 				this.$emit('uploadComplete', files);
-
-				if (this.updates.firmware || this.updates.wifiServer || this.updates.wifiServerSpiffs) {
-					// Ask user to perform an update
-					this.confirmUpdate = true;
-				} else if (!this.isLocal && this.updates.webInterface) {
-					// Reload the web interface immediately if it was the only update
-					location.reload();
-				}
-			}
-		},
-		async startUpdate() {
-			// Start firmware update
-			let modules = [];
-			if (this.updates.firmware) {
-				modules.push('0');
-			}
-			if (this.updates.wifiServer) {
-				modules.push('1');
-			}
-			if (this.updates.wifiServerSpiffs) {
-				modules.push('2');
-			}
-
-			this.updates.codeSent = true;
-			try {
-				await this.sendCode(`M997 S${modules.reduce((a, b) => `${a}:${b}`)}`);
-			} catch (e) {
-				// this is expected
 			}
 		},
 		dragOver(e) {
