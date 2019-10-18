@@ -37,9 +37,6 @@ export default {
 		newDirectory: {
 			caption: 'New Directory'
 		},
-		newFilament: {
-			caption: 'New Filament'
-		},
 		newFile: {
 			caption: 'New File'
 		},
@@ -58,10 +55,6 @@ export default {
 			macros: {
 				caption: 'Upload Macro File(s)',
 				title: 'Upload one or more macro files (drag&drop is supported as well)'
-			},
-			filaments: {
-				caption: 'Upload Filament Configs',
-				title: 'Upload one or more filament configurations (drag&drop is supported as well)'
 			},
 			sys: {
 				caption: 'Upload System Files',
@@ -134,11 +127,6 @@ export default {
 			title: 'Perform factory reset?',
 			prompt: 'Are you sure you wish to perform a factory reset? All saved settings will be lost.'
 		},
-		filament: {
-			titleChange: 'Change Filament',
-			titleLoad: 'Load Filament',
-			prompt: 'Please choose a filament:'
-		},
 		fileEdit: {
 			gcodeReference: 'G-Code Reference',
 			menuReference: 'Menu Reference',
@@ -156,10 +144,6 @@ export default {
 		newDirectory: {
 			title: 'New Directory',
 			prompt: 'Please enter a new directory name:'
-		},
-		newFilament: {
-			title: 'New Filament',
-			prompt: 'Please enter a name for the new filament:'
 		},
 		newFile: {
 			title: 'New File',
@@ -190,7 +174,6 @@ export default {
 		numberRequired: 'Please enter a valid number'
 	},
 	directory: {
-		filaments: 'Filaments Directory',
 		gcodes: 'G-Codes Directory',
 		macros: 'Macros Directory',
 		sys: 'System Directory',
@@ -220,7 +203,6 @@ export default {
 		turnOffEverythingFailed: 'Failed to turn everything off',
 		filelistRequestFailed: 'Failed to get file list',
 		fileinfoRequestFailed: 'Failed to get file info for {0}',
-		filamentsLoadFailed: 'Failed to load filaments',
 		move: 'Failed to move {0} to {1}'
 	},
 	events: {
@@ -312,9 +294,6 @@ export default {
 			downloadText: 'Download as Text',
 			downloadCSV: 'Download as CSV'
 		},
-		filament: {
-			noFilaments: 'No Filaments'
-		},
 		macro: {
 			caption: 'Macros',
 			noMacros: 'No Macros',
@@ -350,7 +329,6 @@ export default {
 		files: {
 			caption: 'File Management',
 			jobs: 'Jobs',
-			filaments: 'Filaments',
 			macros: 'Macros',
 			system: 'System',
 			web: 'Web'
@@ -374,11 +352,6 @@ export default {
 			success: 'Successfully deleted {0}',
 			successMultiple: 'Successfully deleted {0} items'
 		},
-		deleteFilament: {
-			errorTitle: 'Failed to delete filament(s)',
-			errorStillLoaded: 'At least one of the selected filaments is still loaded. Please unload them before you proceed',
-			errorSubDirectories: 'The filament {0} contains sub-directories. Please delete them manually and try again.'
-		},
 		download: {
 			title: 'Downloading {0} @ {1}, {2}% complete',
 			message: 'Please stand by while the file is being downloaded...',
@@ -400,19 +373,9 @@ export default {
 			successTitle: 'Directory created',
 			successMessage: 'Successfully created directory {0}'
 		},
-		newFilament: {
-			errorTitle: 'Failed to create filament',
-			errorTitleMacros: 'Failed to create filament macros',
-			successTitle: 'Filament created',
-			successMessage: 'Successfully created filament {0}'
-		},
 		rename: {
 			success: 'Successfully renamed {0} to {1}',
 			error: 'Failed to rename {0} to {1}',
-		},
-		renameFilament: {
-			errorTitle: 'Failed to rename filament',
-			errorStillLoaded: 'This filament is still loaded. Please unload it before you proceed'
 		},
 		responseTooLong: 'Response too long, see Console',
 		upload: {
@@ -621,9 +584,6 @@ export default {
 			allActiveTemperatures: 'Set all active temperatures',
 			allStandbyTemperatures: 'Set all standby temperatures',
 			tool: 'Tool {0}',
-			loadFilament: 'Load Filament',
-			changeFilament: 'Change Filament',
-			unloadFilament: 'Unload Filament',
 			heater: 'Heater {0}',
 			current: 'Current',
 			active: 'Active',

@@ -15,10 +15,6 @@ export default function(hostname) {
 					column: 'date',
 					descending: true
 				},
-				filaments: {
-					column: 'name',
-					descending: false
-				},
 				jobs: {
 					column: 'lastModified',
 					descending: true

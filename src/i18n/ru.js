@@ -37,9 +37,6 @@
 		newDirectory: {
 			caption: 'Новая папка'
 		},
-		newFilament: {
-			caption: 'Новый филамент'
-		},
 		newFile: {
 			caption: 'Новый файл'
 		},
@@ -58,10 +55,6 @@
 			macros: {
 				caption: 'Загрузить макрос',
 				title: 'Загрузить один или несколько макросов (drag&drop поддерживается)'
-			},
-			filaments: {
-				caption: 'Загрузить конфиг филамента',
-				title: 'Загрузить одну или несколько конфигураций филамента (drag&drop поддерживается)'
 			},
 			sys: {
 				caption: 'Загрузить системный файл',
@@ -134,11 +127,6 @@
 			title: 'Выполнить сброс к заводским настройкам?',
 			prompt: 'Вы уверены, что хотите выполнить сброс настроек к заводским настройкам? Все сохраненные настройки будут потеряны.'
 		},
-		filament: {
-			titleChange: 'Смена филамента',
-			titleLoad: 'Загрузить филамент',
-			prompt: 'Выберите филамент:'
-		},
 		fileEdit: {
 			gcodeReference: 'Информация о G-коде',
 			menuReference: 'Информация о меню',
@@ -156,10 +144,6 @@
 		newDirectory: {
 			title: 'Новая папка',
 			prompt: 'Введите имя новой папки:'
-		},
-		newFilament: {
-			title: 'Новый филамент',
-			prompt: 'Введите имя нового филамента:'
 		},
 		newFile: {
 			title: 'Новый файл',
@@ -190,7 +174,6 @@
 		numberRequired: 'Введите правильный номер'
 	},
 	directory: {
-		filaments: 'Папка филамента',
 		gcodes: 'Папка G-кодов',
 		macros: 'Папка макросов',
 		sys: 'Системная папка',
@@ -220,7 +203,6 @@
 		turnOffEverythingFailed: 'Не получилось всё выключить',
 		filelistRequestFailed: 'Ошибка получения списка файлов',
 		fileinfoRequestFailed: 'Не удалось получить инфо для {0}',
-		filamentsLoadFailed: 'Ошибка загрузки филамента',
 		move: 'Ошибка перемещения {0} к {1}'
 	},
 	events: {
@@ -312,9 +294,6 @@
 			downloadText: 'Скачать как текст',
 			downloadCSV: 'Скачать как CSV'
 		},
-		filament: {
-			noFilaments: 'Нет филаментов'
-		},
 		macro: {
 			caption: 'Макрос',
 			noMacros: 'нет макросов',
@@ -350,7 +329,6 @@
 		files: {
 			caption: 'Менеджер файлов',
 			jobs: 'G-код',
-			filaments: 'Филамент',
 			macros: 'Макросы',
 			system: 'Система',
 			web: 'Web'
@@ -374,11 +352,6 @@
 			success: 'Успешно удалено {0}',
 			successMultiple: 'Успешно удалено {0}'
 		},
-		deleteFilament: {
-			errorTitle: 'Ошибка удаления филамента',
-			errorStillLoaded: 'По крайней мере, один из филаментов используется. Выгрузите перед тем, как продолжить.',
-			errorSubDirectories: 'Филамент {0} содержит поддиректории. Удалите вручную и попробуйте снова.'
-		},
 		download: {
 			title: 'Скачивание {0} @ {1}, {2}%',
 			message: 'Подождите, пока файл скачивается...',
@@ -400,19 +373,9 @@
 			successTitle: 'Папка создана',
 			successMessage: 'Успешно создана папка {0}'
 		},
-		newFilament: {
-			errorTitle: 'Ошибка создания филамента',
-			errorTitleMacros: 'Не удалось создать макрос филамента',
-			successTitle: 'Филамент создан',
-			successMessage: 'Успешно создан филамент {0}'
-		},
 		rename: {
 			success: 'Успешно переименовано {0} в {1}',
 			error: 'Ошибка переименования {0} в {1}',
-		},
-		renameFilament: {
-			errorTitle: 'Ошибка переименования филамента',
-			errorStillLoaded: 'Этот филамент используется. Выгрузите и попробуйте снова'
 		},
 		responseTooLong: 'Слишком долгий ответ, смотрите консоль',
 		upload: {
@@ -621,9 +584,6 @@
 			allActiveTemperatures: 'Темп. активного режима',
 			allStandbyTemperatures: 'Темп. режима ожидания',
 			tool: 'Уст-во {0}',
-			loadFilament: 'Загрузить филамент',
-			changeFilament: 'Сменить филамент',
-			unloadFilament: 'Вывод филамента',
 			heater: 'Статус {0}',
 			current: 't°C ',
 			active: 'Акт.',

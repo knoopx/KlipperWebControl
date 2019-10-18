@@ -94,7 +94,6 @@ export function stripMacroFilename(filename) {
 const pathObj = {
 	gcodes: '0:/gcodes',
 	macros: '0:/macros',
-	filaments: '0:/filaments',
 	sys: '0:/sys',
 	www: '0:/www',
 

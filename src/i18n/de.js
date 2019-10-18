@@ -37,9 +37,6 @@ export default {
 		newDirectory: {
 			caption: 'Neues Verzeichnis'
 		},
-		newFilament: {
-			caption: 'Neues Filament'
-		},
 		newFile: {
 			caption: 'Neue Datei'
 		},
@@ -58,10 +55,6 @@ export default {
 			macros: {
 				caption: 'Makro(s) Hochladen',
 				title: 'Eine oder mehr Makrodateien hochladen (Drag&Drop wird ebenfalls unterstützt)'
-			},
-			filaments: {
-				caption: 'Filamentkonfiguration Hochladen',
-                title: 'Eine oder mehr Filamentkonfigurationen hochladen (Drag&Drop wird ebenfalls unterstützt)'
 			},
 			sys: {
 				caption: 'Systemdatei(en) hochladen',
@@ -134,11 +127,6 @@ export default {
 			title: 'Auf Werkseinstellungen zurücksetzen?',
 			prompt: 'Sind Sie sicher, dass sie einen Reset auf Werkseinstellungen durchführen möchten? Alle gespeicherten Einstellungen gehen dabei verloren.'
 		},
-		filament: {
-			titleChange: 'Filament ändern',
-			titleLoad: 'Filament laden',
-			prompt: 'Bitte wählen Sie ein Filament:'
-		},
 		fileEdit: {
 			gcodeReference: 'G-Code-Referenz',
 			menuReference: 'Menüreference',
@@ -156,10 +144,6 @@ export default {
 		newDirectory: {
 			title: 'Neues Verzeichnis',
 			prompt: 'Bitte geben Sie einen neuen Verzeichnisnamen ein:'
-		},
-		newFilament: {
-			title: 'Neues Filament',
-			prompt: 'Bitte geben Sie einen Namen füra das neue Filament ein:'
 		},
 		newFile: {
 			title: 'Neue Datei',
@@ -190,7 +174,6 @@ export default {
 		numberRequired: 'Bitte gültige Zahl eingeben'
 	},
 	directory: {
-		filaments: 'Filamentverzeichnis',
 		gcodes: 'G-Code-Verzeichnis',
 		macros: 'Makroverzeichnis',
 		sys: 'Systemverzeichnis',
@@ -220,7 +203,6 @@ export default {
 		turnOffEverythingFailed: 'Konnte nicht alles abschalten',
 		filelistRequestFailed: 'Konnte Dateilist nicht abfragen',
 		fileinfoRequestFailed: 'Konnte Dateiinfo für {0} nicht abfragen',
-		filamentsLoadFailed: 'Konnte Filamente nicht laden',
 		move: 'Konnte Datei {0} nicht nach {1} verschieben'
 	},
 	events: {
@@ -312,9 +294,6 @@ export default {
 			downloadText: 'Als Text herunterladen',
 			downloadCSV: 'Als CSV herunterladen'
 		},
-		filament: {
-			noFilaments: 'Keine Filamente'
-		},
 		macro: {
 			caption: 'Makros',
 			noMacros: 'Keine Makros',
@@ -350,7 +329,6 @@ export default {
 		files: {
 			caption: 'Dateiverwaltung',
 			jobs: 'Aufträge',
-			filaments: 'Filamente',
 			macros: 'Makros',
 			system: 'System',
 			web: 'Web'
@@ -374,11 +352,6 @@ export default {
 			success: '{0} wurde erfolgreich gelöscht',
 			successMultiple: '{0} Elemente sind erfolgreich gelöscht worden'
 		},
-		deleteFilament: {
-			errorTitle: 'Konnte Filament(e) nicht löschen',
-			errorStillLoaded: 'Mindestens eins der ausgewählten Filamente ist noch geladen. Bitte erst entladen bevor Sie fortfahren',
-			errorSubDirectories: 'Das Filament {0} enthält Unterverzeichnisse. Bitte löschen Sie diese erst händisch und versuchen Sie es erneut'
-		},
 		download: {
 			title: 'Lade {0} @ {1} herunter, {2}% abgeschlossen',
 			message: 'Bitte warten Sie während die Datei heruntergeladen wird...',
@@ -400,19 +373,9 @@ export default {
 			successTitle: 'Verzeichnis erstellt',
 			successMessage: 'Verzeichnis {0} wurde erfolgreich erstellt'
 		},
-		newFilament: {
-			errorTitle: 'Konnte Filament nicht anlegen',
-			errorTitleMacros: 'Konnte Filamentmakros nicht anlegen',
-			successTitle: 'Filament erstellt',
-			successMessage: 'Successfully created filament {0}'
-		},
 		rename: {
 			success: '{0} wurde erfolgreich nach {1} umbenannt',
 			error: 'Konnte {0} nicht nach {1} umbenennen',
-		},
-		renameFilament: {
-			errorTitle: 'Konnte Filament nicht umbenennen',
-			errorStillLoaded: 'Dieses Filament ist noch geladen. Bitte erst entladen bevor Sie fortfahren'
 		},
 		responseTooLong: 'Nachricht zu lang, siehe Konsole',
 		upload: {
@@ -621,9 +584,6 @@ export default {
 			allActiveTemperatures: 'Alle aktiven Temperaturen setzen',
 			allStandbyTemperatures: 'Alle Standbytemperaturen setzen',
 			tool: 'Werkzeug {0}',
-			loadFilament: 'Filament laden',
-			changeFilament: 'Filament wechseln',
-			unloadFilament: 'Filament entladen',
 			heater: 'Heizer {0}',
 			current: 'Aktuell',
 			active: 'Aktiv',

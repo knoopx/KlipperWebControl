@@ -383,7 +383,6 @@ export default class PollConnector extends BaseConnector {
 					extruders: tool.drives,
 					axes: tool.axisMap,
 					fans: bitmapToArray(tool.fans),
-					filament: tool.filament,
 					offsets: tool.offsets
 				})) : []
 			});

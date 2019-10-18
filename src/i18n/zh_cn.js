@@ -39,9 +39,6 @@ export default {
 		newDirectory: {
 			caption: '新建目录'
 		},
-		newFilament: {
-			caption: '新建细丝'
-		},
 		newFile: {
 			caption: '新建文件'
 		},
@@ -60,10 +57,6 @@ export default {
 			macros: {
 				caption: '上传宏文件',
 				title: '上传一个或多个宏文件（也支持拖放）'
-			},
-			filaments: {
-				caption: '上传细丝配置',
-				title: '上传一个或多个细丝配置（也支持拖放）'
 			},
 			sys: {
 				caption: '上传系统文件',
@@ -136,11 +129,6 @@ export default {
 			title: '恢复出厂设置？',
 			prompt: '您确定要执行恢复出厂设置吗？ 所有保存的设置都将丢失。'
 		},
-		filament: {
-			titleChange: '改变细丝',
-			titleLoad: '载入细丝',
-			prompt: '请选择细丝：'
-		},
 		fileEdit: {
 			gcodeReference: 'G-Code参考',
 			menuReference: '菜单参考',
@@ -158,10 +146,6 @@ export default {
 		newDirectory: {
 			title: '新建目录',
 			prompt: '请输入新建目录名称：'
-		},
-		newFilament: {
-			title: '新建细丝',
-			prompt: '请输入新建细丝名称：'
 		},
 		newFile: {
 			title: '新建文件',
@@ -192,7 +176,6 @@ export default {
 		numberRequired: '请输入有效的数值'
 	},
 	directory: {
-		filaments: '细丝目录',
 		gcodes: 'G-Codes目录',
 		macros: '宏目录',
 		sys: '系统目录',
@@ -222,7 +205,6 @@ export default {
 		turnOffEverythingFailed: '无法关闭所有内容',
 		filelistRequestFailed: '无法获取文件列表',
 		fileinfoRequestFailed: '无法获取文件{0}的信息',
-		filamentsLoadFailed: '无法加载细丝',
 		move: '从{0}移动到{1}失败'
 	},
 	events: {
@@ -313,9 +295,6 @@ export default {
 			downloadText: '下载为文本文件',
 			downloadCSV: '下载为CSV格式'
 		},
-		filament: {
-			noFilaments: '没有细丝'
-		},
 		macro: {
 			caption: '宏',
 			noMacros: '没有宏文件',
@@ -351,7 +330,6 @@ export default {
 		files: {
 			caption: '文件管理',
 			jobs: '任务',
-			filaments: '细丝',
 			macros: '宏',
 			system: '系统',
 			web: 'Web'
@@ -374,11 +352,6 @@ export default {
 			errorMessageDirectory: '请确保此目录为空',
 			success: '已成功删除{0}',
 			successMultiple: '已成功删除{0}个项目'
-		},
-		deleteFilament: {
-			errorTitle: '删除细丝失败',
-			errorStillLoaded: '仍然装载至少一根选定的细丝。 请在继续之前卸载它',
-			errorSubDirectories: '细丝{0}包含子目录。 请手动删除它们，然后重试。'
 		},
 		download: {
 			title: '正在下载{0} @ {1}, {2}%完成',
@@ -410,10 +383,6 @@ export default {
 		rename: {
 			success: '成功重命名{0}为{1}',
 			error: '重命名{0}为{1}失败',
-		},
-		renameFilament: {
-			errorTitle: '重命名细丝失败',
-			errorStillLoaded: '选定的细丝已装载。 请在继续之前卸载它'
 		},
 		responseTooLong: '响应时间过长，请查看控制台',
 		upload: {
@@ -622,9 +591,6 @@ export default {
 			allActiveTemperatures: '设置所有活动温度',
 			allStandbyTemperatures: '设置所有待机温度',
 			tool: '工具{0}',
-			loadFilament: '载入细丝',
-			changeFilament: '更改细丝',
-			unloadFilament: '卸载细丝',
 			heater: '加热器{0}',
 			current: '当前',
 			active: '活动',

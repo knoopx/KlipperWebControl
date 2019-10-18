@@ -38,9 +38,6 @@ export default {
 		newDirectory: {
 			caption: 'Nouveau Dossier'
 		},
-		newFilament: {
-			caption: 'Nouveau Filament'
-		},
 		newFile: {
 			caption: 'Nouveau Fichier'
 		},
@@ -59,10 +56,6 @@ export default {
 			macros: {
 				caption: 'Envoyer Fichier(s) Macro',
 				title: 'Envoyer un ou plusieurs fichiers macros (le glisser/déposer est supporté)'
-			},
-			filaments: {
-				caption: 'Envoyer Configs Filament',
-				title: 'Envoyer une ou plusieures configuration de filament (le glisser/déposer est supporté)'
 			},
 			sys: {
 				caption: 'Envoyer Fichiers Système',
@@ -135,11 +128,6 @@ export default {
 			title: 'Effectuer une réinitialissation d\'usine?',
 			prompt: 'Etes-vous sûr de vouloir éffectuer une réinitialisation d\'usine ? Tout les paramètres sauvegardés seront perdus.'
 		},
-		filament: {
-			titleChange: 'Changer Filament',
-			titleLoad: 'Charger Filament',
-			prompt: 'Merci de choisir un filament:'
-		},
 		fileEdit: {
 			gcodeReference: 'Références G-Code',
 			menuReference: 'Référence Menu',
@@ -157,10 +145,6 @@ export default {
 		newDirectory: {
 			title: 'Nouveau Dossier',
 			prompt: 'Merci d\'entrer un nom de nouveau dossier:'
-		},
-		newFilament: {
-			title: 'Nouveau Filament',
-			prompt: 'Merci d\'entrer un nom pour le nouveau filament:'
 		},
 		newFile: {
 			title: 'Nouveau Fichier',
@@ -191,7 +175,6 @@ export default {
 		numberRequired: 'Merci d\'entrer un nombre valide'
 	},
 	directory: {
-		filaments: 'Répertoire Filaments',
 		gcodes: 'Répertoire G-Codes',
 		macros: 'Répertoire Macros',
 		sys: 'Répertoire Systeme',
@@ -221,7 +204,6 @@ export default {
 		turnOffEverythingFailed: 'Impossible de tout éteindre',
 		filelistRequestFailed: 'Impossible d\'obtenir la liste des fichiers',
 		fileinfoRequestFailed: 'Impossible d\'obtenir les informations du fichier pour {0}',
-		filamentsLoadFailed: 'Impossible de charger le filament',
 		move: 'Impossible de déplacer {0} à {1}'
 	},
 	events: {
@@ -313,9 +295,6 @@ export default {
 			downloadText: 'Télécharger en Texte',
 			downloadCSV: 'Télécharger en CSV'
 		},
-		filament: {
-			noFilaments: 'Aucun Filaments'
-		},
 		macro: {
 			caption: 'Macros',
 			noMacros: 'Aucun Macros',
@@ -351,7 +330,6 @@ export default {
 		files: {
 			caption: 'Gestion de Fichiers',
 			jobs: 'Travails',
-			filaments: 'Filaments',
 			macros: 'Macros',
 			system: 'Système',
 			web: 'Web'
@@ -375,11 +353,6 @@ export default {
 			success: '{0} supprimé avec succès',
 			successMultiple: '{0} objets supprimé avec succès'
 		},
-		deleteFilament: {
-			errorTitle: 'Impossible de supprimer le(s) filament(s)',
-			errorStillLoaded: 'Au moins un des filaments séléctionné est toujours chargé. Merci de les décharger avant de procéder',
-			errorSubDirectories: 'Le filament {0} contient des sous-dossiers. Merci de les supprimer manuellement et réessayer.'
-		},
 		download: {
 			title: 'Téléchargement {0} @ {1}, {2}% complet',
 			message: 'Veuillez patienter pendant que le fichier est en téléchargement...',
@@ -401,19 +374,9 @@ export default {
 			successTitle: 'Dossier créer',
 			successMessage: 'Création du dossier {0} réussi'
 		},
-		newFilament: {
-			errorTitle: 'Échec de la création du filament',
-			errorTitleMacros: 'Échec de la création des macros de filament',
-			successTitle: 'Filament créé',
-			successMessage: 'Création du filament {0} réusssi'
-		},
 		rename: {
 			success: 'Renommage de {0} en {1} réussi',
 			error: 'Échec du renommage de {0} en {1}',
-		},
-		renameFilament: {
-			errorTitle: 'Échec du renommage du filament',
-			errorStillLoaded: 'Ce filament est toujours chargé. Merci de le décharger avant de procéder'
 		},
 		responseTooLong: 'Réponse trop longue, voir la Console',
 		upload: {
@@ -622,9 +585,6 @@ export default {
 			allActiveTemperatures: 'Définir toutes les températures actives',
 			allStandbyTemperatures: 'Définir toutes les températures de veille',
 			tool: 'Outil {0}',
-			loadFilament: 'Charger Filament',
-			changeFilament: 'Changer Filament',
-			unloadFilament: 'Décharger Filament',
 			heater: 'Chauffage {0}',
 			current: 'Actuel',
 			active: 'Actif',

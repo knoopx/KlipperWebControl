@@ -89,13 +89,6 @@ export const Routing = [
 				path: '/Files/Macros',
 				component: Files.Macros
 			},
-			// Filaments
-			{
-				icon: 'radio_button_checked',
-				caption: 'menu.files.filaments',
-				path: '/Files/Filaments',
-				component: Files.Filaments
-			},
 			// System
 			{
 				icon: 'settings',

@@ -35,10 +35,6 @@ export default {
 					pathItems.shift();
 					pathItems[0] = Path.macros;
 					rootCaption = this.$t('directory.macros');
-				} else if (this.value.startsWith(Path.filaments)) {
-					pathItems.shift();
-					pathItems[0] = Path.filaments;
-					rootCaption = this.$t('directory.filaments');
 				} else if (this.value.startsWith(Path.sys)) {
 					pathItems.shift();
 					pathItems[0] = Path.sys;

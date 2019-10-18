@@ -45,7 +45,6 @@ export default {
 				case 'gcodes':
 					return '.g,.gcode,.gc,.gco,.nc,.ngc,.tap';
 				case 'macros': return '*';
-				case 'filaments': return '.zip';
 				case 'sys': return '.zip,.bin,.json,.g,.csv';
 				case 'www': return '.zip,.csv,.json,.htm,.html,.ico,.xml,.css,.map,.js,.ttf,.eot,.svg,.woff,.woff2,.jpeg,.jpg,.png,.gz';
 			}
@@ -61,7 +60,6 @@ export default {
 				case 'gcodes':
 					return Path.gcodes;
 				case 'macros': return Path.macros;
-				case 'filaments': return Path.filaments;
 				case 'sys': return Path.sys;
 				case 'www': return Path.www;
 			}
@@ -136,7 +134,7 @@ export default {
 						// Open the ZIP file and read its content
 						await zip.loadAsync(files[0], { checkCRC32: true });
 						zip.forEach(function(file) {
-							if (!file.endsWith('/') && (file.split('/').length === 2 || target !== 'filaments')) {
+							if (!file.endsWith('/') && (file.split('/').length === 2)) {
 								zipFiles.push(file);
 							}
 						});

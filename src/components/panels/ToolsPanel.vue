@@ -73,11 +73,6 @@ table.extra tr > td:first-child {
 									<br/>
 									<span class="font-weight-regular caption">
 										T{{ tool.number }}
-										<template v-if="canLoadFilament(tool)">
-											- <panel-link :active="!loadingFilament" class="font-weight-regular" href="#" @click="filamentClick($event, tool)">
-												{{ tool.filament ? tool.filament : $t('panel.tools.loadFilament') }}
-											</panel-link>
-										</template>
 									</span>
 								</th>
 
@@ -185,18 +180,6 @@ table.extra tr > td:first-child {
 				</v-alert>
 
 				<reset-heater-fault-dialog :shown.sync="resetHeaterFault" :heater="faultyHeater"></reset-heater-fault-dialog>
-
-				<v-menu v-model="filamentMenu.shown" :activator="filamentMenu.target" offset-y auto>
-					<v-list>
-						<v-list-tile @click="filamentMenu.dialogShown = true">
-							<v-icon class="mr-1">swap_vert</v-icon> {{ $t('panel.tools.changeFilament') }}
-						</v-list-tile>
-						<v-list-tile @click="unloadFilament">
-							<v-icon class="mr-1">arrow_upward</v-icon> {{ $t('panel.tools.unloadFilament') }}
-						</v-list-tile>
-					</v-list>
-				</v-menu>
-				<filament-dialog :shown.sync="filamentMenu.dialogShown" :tool="filamentMenu.tool"></filament-dialog>
 			</template>
 
 			<template v-else-if="currentPage === 'extra'">
@@ -256,14 +239,6 @@ export default {
 
 			currentPage: 'tools',
 			waitingForCode: false,
-
-			loadingFilament: false,
-			filamentMenu: {
-				shown: false,
-				tool: undefined,
-				target: undefined,
-				dialogShown: false
-			},
 
 			resetHeaterFault: false,
 			faultyHeater: -1
@@ -327,29 +302,6 @@ export default {
 			}
 			return this.$display(heater.current, 1, unit);
 		},
-
-		canLoadFilament(tool) {
-			// TODO enhance this using dedicate setting defining if the E count does not matter
-			return !this.isFrozen && (tool.filament !== undefined) && (tool.extruders.length === 1);
-		},
-		filamentClick(e, tool) {
-			this.filamentMenu.tool = tool;
-			if (tool.filament) {
-				this.filamentMenu.target = e.target;
-				this.filamentMenu.shown = true;
-			} else {
-				this.filamentMenu.dialogShown = true;
-			}
-		},
-		unloadFilament() {
-			let code = '';
-			if (this.state.currentTool !== this.filamentMenu.tool.number) {
-				code = `T${this.filamentMenu.tool.number}\n`;
-			}
-			code += 'M702';
-			this.sendCode(code);
-		},
-
 		toolClick(tool) {
 			if (!this.isConnected) {
 				return;
