@@ -43,7 +43,7 @@ export default function(hostname, connector) {
 			isReconnecting: false
 		},
 		getters: {
-			client: () => connector.axios,
+			client: () => connector ? connector.axios : null,
 			hasTemperaturesToDisplay: state => state.model.heat.heaters.length || state.settings.displayedExtraTemperatures.length,
 			connector: () => connector ? connector.type : null
 		},
