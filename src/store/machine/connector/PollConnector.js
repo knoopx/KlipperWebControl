@@ -269,17 +269,14 @@ export default class PollConnector extends BaseConnector {
 				beds: [
 					response.data.temps.bed ? {
 						active: [response.data.temps.bed.active],
-						standby: (response.data.temps.bed.standby === undefined) ? [] : [response.data.temps.bed.standby]
 					} : null
 				],
 				chambers: [
 					response.data.temps.chamber ? {
 						active: [response.data.temps.chamber.active],
-						standby: (response.data.temps.chamber.standby === undefined) ? [] : [response.data.temps.chamber.standby]
 					} : null,
 					response.data.temps.cabinet ? {
 						active: [response.data.temps.cabinet.active],
-						standby: (response.data.temps.cabinet.standby === undefined) ? [] : [response.data.temps.cabinet.standby]
 					} : null
 				],
 				extra: response.data.temps.extra.map((extraHeater) => ({
@@ -327,9 +324,8 @@ export default class PollConnector extends BaseConnector {
 				currentTool: response.data.currentTool,
 				status: this.convertStatusLetter(response.data.status)
 			},
-			tools: response.data.temps.tools.active.map((active, index) => ({
+			tools: response.data.temps.tools.active.map((active) => ({
 				active,
-				standby: response.data.temps.tools.standby[index]
 			}))
 		});
 

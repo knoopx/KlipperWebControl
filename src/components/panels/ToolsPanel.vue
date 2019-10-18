@@ -48,7 +48,6 @@ table.extra tr > td:first-child {
 						</v-btn>
 
 						<tool-input ref="allActive" :label="$t('panel.tools.allActiveTemperatures')" all active></tool-input>
-						<tool-input :label="$t('panel.tools.allStandbyTemperatures')" all standby :tab-target="$refs.dropdownActivator"></tool-input>
 					</v-layout>
 				</v-card>
 			</v-menu>
@@ -62,8 +61,7 @@ table.extra tr > td:first-child {
 						<th class="pl-2">{{ $t('panel.tools.tool', ['']) }}</th>
 						<th>{{ $t('panel.tools.heater', ['']) }}</th>
 						<th>{{ $t('panel.tools.current', ['']) }}</th>
-						<th>{{ $t('panel.tools.active') }}</th>
-						<th class="pr-2">{{ $t('panel.tools.standby') }}</th>
+						<th class="pr-2">{{ $t('panel.tools.active') }}</th>
 					</thead>
 					<tbody>
 						<template v-for="(tool, index) in tools">
@@ -100,12 +98,9 @@ table.extra tr > td:first-child {
 										{{ $display(spindles[tool.spindle].current, 0, $t('generic.rpm')) }}
 									</span>
 								</td>
-								<td class="pl-2 pr-1">
+								<td class="pl-2 pr-2">
 									<tool-input v-if="tool.heaters.length" :tool="tool" :heaterIndex="0" active></tool-input>
 									<tool-input v-else-if="isNumber(tool.spindle) && tool.spindle >= 0" :spindle="spindles[tool.spindle]" active></tool-input>
-								</td>
-								<td class="pl-1 pr-2">
-									<tool-input v-if="tool.heaters.length" :tool="tool" :heaterIndex="0" standby></tool-input>
 								</td>
 							</tr>
 
@@ -122,11 +117,8 @@ table.extra tr > td:first-child {
 								<td>
 									{{ formatHeaterValue(heat.heaters[heater]) }}
 								</td>
-								<td class="pl-2 pr-1">
+								<td class="pl-2 pr-2">
 									<tool-input :tool="tool" :heaterIndex="heaterIndex + 1" active></tool-input>
-								</td>
-								<td class="pl-1 pr-2">
-									<tool-input :tool="tool" :heaterIndex="heaterIndex + 1" standby></tool-input>
 								</td>
 							</tr>
 
@@ -167,11 +159,8 @@ table.extra tr > td:first-child {
 											{{ formatHeaterValue(heat.heaters[bed.heaters[0]]) }}
 										</span>
 									</td>
-									<td class="pl-2 pr-1">
+									<td class="pl-2 pr-2">
 										<tool-input v-if="bed.heaters.length" :bed="bed" :bedIndex="0" :heaterIndex="0" active></tool-input>
-									</td>
-									<td class="pl-1 pr-2">
-										<tool-input v-if="bed.standby.length" :bed="bed" :bedIndex="0" :heaterIndex="0" standby></tool-input>
 									</td>
 								</tr>
 								<tr v-for="(heater, heaterIndex) in bed.heaters.slice(1)" :key="`bed-${index}-${heater}`">
@@ -187,11 +176,8 @@ table.extra tr > td:first-child {
 									<td>
 										{{ formatHeaterValue(heat.heaters[heater]) }}
 									</td>
-									<td class="pl-2 pr-1">
+									<td class="pl-2 pr-2">
 										<tool-input :bed="bed" :bedIndex="index" :heaterIndex="heaterIndex + 1" active></tool-input>
-									</td>
-									<td class="pl-1 pr-2">
-										<tool-input v-if="bed.standby.length > heaterIndex + 1" :bed="bed" :bedIndex="index" :heaterIndex="heaterIndex + 1" standby></tool-input>
 									</td>
 								</tr>
 							</template>
@@ -227,11 +213,8 @@ table.extra tr > td:first-child {
 											{{ formatHeaterValue(heat.heaters[chamber.heaters[0]]) }}
 										</span>
 									</td>
-									<td class="pl-2 pr-1">
+									<td class="pl-2 pr-2">
 										<tool-input v-if="chamber.heaters.length" :chamber="chamber" :chamberIndex="index" :heaterIndex="0" active></tool-input>
-									</td>
-									<td class="pl-1 pr-2">
-										<tool-input v-if="chamber.standby.length" :chamber="chamber" :chamberIndex="index" :heaterIndex="0" standby></tool-input>
 									</td>
 								</tr>
 								<tr v-for="(heater, heaterIndex) in chamber.heaters.slice(1)" :key="`chamber-${index}-${heater}`">
@@ -247,11 +230,8 @@ table.extra tr > td:first-child {
 									<td>
 										{{ formatHeaterValue(heat.heaters[heater]) }}
 									</td>
-									<td class="pl-2 pr-1">
+									<td class="pl-2 pr-2">
 										<tool-input :chamber="chamber" :chamberIndex="index" :heaterIndex="heaterIndex + 1" active></tool-input>
-									</td>
-									<td class="pl-1 pr-2">
-										<tool-input v-if="chamber.standby.length > heaterIndex + 1" :chamber="chamber" :chamberIndex="index" :heaterIndex="heaterIndex + 1" standby></tool-input>
 									</td>
 								</tr>
 							</template>
