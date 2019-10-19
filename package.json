@@ -1,6 +1,6 @@
 {
   "name": "klipper-web-control",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "repository": "github:knoopx/KlipperWebControl",
   "license": "GPL-3.0",
   "author": "Víctor Martínez <knoopx@gmail.com>",
