@@ -209,7 +209,7 @@ export default class RestConnector extends BaseConnector {
 			// Deal with generic messages
 			if (data.messages) {
 				data.messages.forEach(async function(message) {
-					await that.dispatch('onCodeCompleted', { code: undefined, message });
+					await that.dispatch('onCodeCompleted', { code: undefined, reply: message });
 				});
 				delete data.messages;
 			}
